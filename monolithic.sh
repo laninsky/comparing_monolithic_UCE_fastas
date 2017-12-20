@@ -9,8 +9,10 @@ for i in `seq 1 $no_fastas`; do current_file=`head -n $i fastalist.txt | tail -n
 
 echo $current_file > current_name; mv temp $current_file; done
 
-
-
+# do some kind of list by folder (should give the individual taxa present)
+# Then go into each folder and blast across genomes. Save this info per taxon
 
 for i in taxa*fasta; do ... cross blast 
+
+# Then take these files and combine them across taxa
 
