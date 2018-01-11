@@ -11,6 +11,6 @@ If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_f
 
 You also need to point to BLAST by setting the following variable before starting
 ```
-BLASTPATH=path/to/bin/blastn
-e.g. BLASTPATH=/Users/alanaalexander/bin/ncbi-blast-2.7.1+/bin/blastn
+exoprt BLASTPATH=path/to/bin/blastn
+e.g. export BLASTPATH=/Users/alanaalexander/bin/ncbi-blast-2.7.1+/bin/blastn
 ```
