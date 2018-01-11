@@ -10,5 +10,7 @@ The code assumes you have a folder with just your monolithic fasta files in it (
 If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_fasta_by_taxa.R
 
 You also need to point to BLAST by setting the following variable before starting
-BLASTPATH=path/to/bin/blast
-
+```
+BLASTPATH=path/to/bin/blastn
+e.g. BLASTPATH=/Users/alanaalexander/bin/ncbi-blast-2.7.1+/bin/blastn
+```
