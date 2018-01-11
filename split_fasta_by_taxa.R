@@ -49,8 +49,12 @@ dir.create(file.path(i, basegenome), showWarnings = FALSE)
 }
 
 # to do, tick through the files, writing out loci with uce as the title to the appropriate folder
-
-file.path(i,basegenome,"ucelocus.txt")
+for (j in seq(1, (dim(to_write)[1]), 2)) {
+  locusname <- unlist(strsplit(to_write[j,1],"_"))[1]
+  i <- unlist(strsplit((unlist(strsplit(to_write[j,1],"_"))[2])," "))[1]
+  write.table(locusname,file.path(i,basegenome,"ucelocus.txt"),append=TRUE,row.names=FALSE,col.names=FALSE,quote=FALSE)
+  write.table(to_write[(j+1),1],file.path(i,basegenome,"ucelocus.txt"),append=TRUE,row.names=FALSE,col.names=FALSE,quote=FALSE)
+}
 
 
 
