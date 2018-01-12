@@ -3,25 +3,33 @@ final_output_matrix <- NULL
 for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
   temp <- as.matrix(read.csv(i, header=FALSE))
   base_genomes <- unique(sort(rbind(temp[,1],temp[,2])))
-  output_matrix <- t(matrix(c(base_genomes,"max_length","which_base_gives_max")))
+  output_matrix <- t(matrix(c(base_genomes,"max_length","which_base_gives_max","problem_locus")))
   for (j in 1:(dim(temp)[1])) { #6A
      # if temp[j,3] already in table
      if (temp[j,3] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,1])]) { #4A
         # TO DO what to do if both [j,3] and [j,4] are already there (shouldn't ever happen)
-        if (temp[j,4] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,1])]) { #5A
+        if (temp[j,4] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,2])]) { #5A
           break
         # TO DO  what to do if temp[j,3] is already in there, but temp[j,4] is not  
         } else { #5AB
-          break 
+          # if there is no value in the output_matrix for the [j,2] base genome
+          if(is.na(output_matrix[(which(output_matrix[,which(output_matrix[1,]==temp[j,1])]==(temp[j,3]))),which(output_matrix[1,]==temp[j,2])])) { #10A
+            break
+          # we have a problem because the locus from the [j,1] base genome is matching to multiple others at the blast threshold we used
+          } else { #10AB
+            output_matrix[which(output_matrix[,which(output_matrix[1,]==temp[j,1])]==temp[j,3]),which(output_matrix[1,]=="problem_locus")] <- "Y"
+            break
+          }  #10B
         } #5B
      # if temp[j,3] NOT already in table   
      } else { #4AB
          # TO DO what to do if temp[j,4] is already in there, but temp[j,3] is not
-        if (temp[j,4] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,1])]) { #3A
+        if (temp[j,4] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,2])]) { #3A
             break
         # what to do if neither temp[j,3] or temp[j,4] exist     
         } else { #3AB    
             temp_row <- t(matrix(NA,nrow=dim(output_matrix)[2]))
+            temp_row[1,which(output_matrix[1,]=="problem_locus")] <- "N"
             temp_row[1,which(output_matrix[1,]==temp[j,1])] <- temp[j,3]
             temp_row[1,which(output_matrix[1,]==temp[j,2])] <- temp[j,4]
             # What to do if both base genomes have equally long loci
@@ -44,7 +52,7 @@ for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
         } #3B
      }  #4B 
   }#6B   
-        
+      
       
       
       
