@@ -1,5 +1,3 @@
-final_output_matrix <- NULL
-
 for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
   temp <- as.matrix(read.csv(i, header=FALSE))
   base_genomes <- unique(sort(rbind(temp[,1],temp[,2])))
@@ -155,6 +153,7 @@ for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
         } #3B
      }  #4B 
   }#6B   
-      
+write.table(output_matrix,paste(i,".summarized",sep=""),quote=FALSE,row.names=FALSE,col.names=FALSE)
+}
        
     
