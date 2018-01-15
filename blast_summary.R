@@ -86,7 +86,6 @@ for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
         if (temp[j,4] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,2])]) { #3A
           # if there is no value in the output_matrix for the [j,1] base genome
           if(all(is.na(output_matrix[(which(output_matrix[,which(output_matrix[1,]==temp[j,2])]==(temp[j,4]))),which(output_matrix[1,]==temp[j,1])]))) { #10A
-            break
             # for each of the rows in output_matrix that match this
             for (k in which(output_matrix[,which(output_matrix[1,]==temp[j,2])]==(temp[j,4]))) { #20A
               output_matrix[k,which(output_matrix[1,]==temp[j,1])] <- temp[j,3]
@@ -103,7 +102,8 @@ for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
                   output_matrix[k,which(output_matrix[1,]=="which_base_gives_max")] <- gsub("/ucelocus.txt","",temp[j,1],fixed=TRUE)
                   output_matrix[k,which(output_matrix[1,]=="max_length")] <- as.numeric(temp[j,5])
                 } #23B
-              } #21B     
+              } #21B 
+            } #20B  
           # we have a problem because the locus from the [j,2] base genome is matching to multiple others at the blast threshold we used
           } else { #10AB
             output_matrix[which(output_matrix[,which(output_matrix[1,]==temp[j,2])]==temp[j,4]),which(output_matrix[1,]=="problem_locus")] <- "Y"
