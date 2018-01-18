@@ -10,9 +10,12 @@ base_list <- temp_output[1,1:((which(temp_output[1,]=="max_length"))-1)]
 pivot_col <- which(temp_output[1,]=="max_length")-1
 
 output_matrix <- t(matrix(c(base_list,length_list,longbase_list,"between_taxa_problem")))
+problem_taxa <- t(matrix(c("taxa","base_genome","uce_locus")))
 
 for (i in file_list) { #1A
-   taxa <- unlist(strsplit(i,"/.*_blast.txt.summarized"))
+   taxa <- unlist(strsplit(i,"/",fixed=TRUE))
+   taxa <- taxa[length(taxa)]
+   taxa <- unlist(strsplit(taxa,"_blast.txt.summarized"))
    output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
    temp_output <- as.matrix(read.table(i)) 
       for (j in 2:(dim(temp_output)[1])) { #2A
@@ -28,6 +31,17 @@ for (i in file_list) { #1A
                      k <- pivot_col+1
                   } else { #4AB this one is for problem loci - need to hold them somewhere until the end
                      break
+                     for (m in 1:pivot_col) { #20A
+                        if(!(is.na(temp_output[j,m]))) { #21A
+                           if(length(which(problem_taxa[,1]==taxa & problem_taxa[,2]==output_matrix[1,m]))<1) { #22A
+                              temp_row <- c(taxa,output_matrix[1,m],temp_output[j,m])
+                              problem_taxa <- rbind(problem_taxa,temp_row)
+                            } else { #22AB
+                              break
+                            } #22B
+                         } #21B 
+                      } #20A        
+                     k <- pivot_col+1
                   } #4B
                } else { #3AB this is for when 
                   break
