@@ -11,17 +11,23 @@ pivot_col <- which(temp_output[1,]=="max_length")-1
 
 output_matrix <- t(matrix(c(base_list,length_list,longbase_list,"between_taxa_problem")))
 
-for (i in file_list) {
-  taxa <- unlist(strsplit(i,"/.*_blast.txt.summarized"))
-  output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
-  temp_output <- as.matrix(read.table(i)) {
-    for (j in 2:(dim(temp_output)[1])) {
-      if(!(grepl(temp_output[j,1], output_matrix[,1]))) {
-        
-        (length(output_matrix[1,])-pivot_col)
-        
-        
-        
+for (i in file_list) { #1A
+   taxa <- unlist(strsplit(i,"/.*_blast.txt.summarized"))
+   output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
+   temp_output <- as.matrix(read.table(i)) 
+   for (j in 2:(dim(temp_output)[1])) { #2A
+      if(!(grepl(temp_output[j,1], output_matrix[,1]))) { #3A
+         if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
+            temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
+            temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
+            temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]                                        
+                                                    
+         } else { #4AB this one is for problem loci
+            break
+         } #4B
+      } #3B                                                    
+   } #2B       
+ } #1B       
     
 
 
