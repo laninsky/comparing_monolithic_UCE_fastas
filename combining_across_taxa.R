@@ -16,6 +16,7 @@ for (i in file_list) { #1A
    output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
    temp_output <- as.matrix(read.table(i)) 
       for (j in 2:(dim(temp_output)[1])) { #2A
+         k <- 1
          while (k <= pivot_col) { #10A
             if(!(is.na(temp_output[j,k]))) { #11A
                if(!(grepl(temp_output[j,k], output_matrix[,k]))) { #3A
@@ -30,6 +31,7 @@ for (i in file_list) { #1A
                } else { #3AB this is for when 
                   break
                } #3B
+               break
            } #11B
            k <- k + 1 
         } #10B   
