@@ -3,7 +3,8 @@ taxa_list <- unlist(strsplit(file_list,"/",fixed=TRUE))
 taxa_list <- taxa_list[seq((length(taxa_list)/length(file_list)),length(taxa_list),(length(taxa_list)/length(file_list)))]
 taxa_list <- unlist(strsplit(taxa_list,"_blast.txt.summarized")) 
 
-length_list
+length_list <- paste(taxa_list,"_length",sep="")
+base_list <- paste(taxa_list,"_longest_base",sep="")
 
 
 temp_output <- as.matrix(read.table(file_list[1]))
