@@ -22,31 +22,30 @@ for (i in file_list) { #1A
          k <- 1
          while (k <= pivot_col) { #10A
             if(!(is.na(temp_output[j,k]))) { #11A
-               if(!(temp_output[j,k] %in% output_matrix[,k])) { #3A
-                  if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
+               if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
+                  if(!(temp_output[j,k] %in% output_matrix[,k])) { #3A
                      temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
                      temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
                      temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]                                        
                      output_matrix <- rbind(output_matrix,temp_row)
                      k <- pivot_col+1
-                  } else { #4AB this one is for problem loci - need to hold them somewhere until the end
+                  } else { #3AB this is for when the locus IS in the output_matrix already, but it isn't a problem locus 
                      break
-                     for (m in 1:pivot_col) { #20A
-                        if(!(is.na(temp_output[j,m]))) { #21A
-                           if(length(which(problem_taxa[,1]==taxa & problem_taxa[,2]==output_matrix[1,m]))<1) { #22A
-                              temp_row <- c(taxa,output_matrix[1,m],temp_output[j,m])
-                              problem_taxa <- rbind(problem_taxa,temp_row)
-                            } else { #22AB
-                              break
-                            } #22B
-                         } #21B 
-                      } #20A        
-                     k <- pivot_col+1
-                  } #4B
-               } else { #3AB this is for when 
+                  } #3B
+               } else { #4AB this one is for problem loci - need to hold them somewhere until the end
                   break
-               } #3B
-               break
+                  for (m in 1:pivot_col) { #20A
+                     if(!(is.na(temp_output[j,m]))) { #21A
+                        if(length(which(problem_taxa[,1]==taxa & problem_taxa[,2]==output_matrix[1,m]))<1) { #22A
+                           temp_row <- c(taxa,output_matrix[1,m],temp_output[j,m])
+                           problem_taxa <- rbind(problem_taxa,temp_row)
+                         } else { #22AB - what to do if the length is more than 1
+                           break
+                         } #22B
+                      } #21B 
+                   } #20A        
+                  k <- pivot_col+1
+              } #4B
            } #11B
            k <- k + 1 
         } #10B   
