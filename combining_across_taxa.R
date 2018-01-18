@@ -16,9 +16,10 @@ for (i in file_list) {
   output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
   temp_output <- as.matrix(read.table(i)) {
     for (j in 2:(dim(temp_output)[1])) {
-      if(!
-         
-         grepl(taxa, output_matrix[1,]) {
+      if(!(grepl(temp_output[j,1], output_matrix[,1]))) {
+        
+        (length(output_matrix[1,])-pivot_col)
+        
         
         
     
