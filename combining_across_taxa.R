@@ -13,9 +13,13 @@ output_matrix <- t(matrix(c(base_list,length_list,longbase_list,"between_taxa_pr
 
 for (i in file_list) {
   taxa <- unlist(strsplit(i,"/.*_blast.txt.summarized"))
+  output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
   temp_output <- as.matrix(read.table(i)) {
     for (j in 2:(dim(temp_output)[1])) {
-      if(!(temp_output[j,1] %in% output_matrix[,1])) {
+      if(!
+         
+         grepl(taxa, output_matrix[1,]) {
+        
         
     
 
