@@ -24,7 +24,8 @@ for (i in file_list) { #1A
                      temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
                      temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
                      temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]                                        
-                                                    
+                     output_matrix <- rbind(output_matrix,temp_row)
+                     k <- pivot_col+1
                   } else { #4AB this one is for problem loci
                      break
                   } #4B
