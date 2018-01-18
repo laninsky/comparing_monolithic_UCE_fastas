@@ -7,6 +7,7 @@ length_list <- paste(taxa_list,"_length",sep="")
 longbase_list <- paste(taxa_list,"_longest_base_genome",sep="")
 temp_output <- as.matrix(read.table(file_list[1]))
 base_list <- temp_output[1,1:((which(temp_output[1,]=="max_length"))-1)]
+pivot_col <- which(temp_output[1,]=="max_length")-1
 
 output_matrix <- t(matrix(c(base_list,length_list,longbase_list,"between_taxa_problem")))
 
@@ -14,7 +15,8 @@ for (i in file_list) {
   taxa <- unlist(strsplit(i,"/.*_blast.txt.summarized"))
   temp_output <- as.matrix(read.table(i)) {
     for (j in 2:(dim(temp_output)[1])) {
-      
+      if(!(temp_output[j,1] %in% output_matrix[,1])) {
+        
     
 
 
