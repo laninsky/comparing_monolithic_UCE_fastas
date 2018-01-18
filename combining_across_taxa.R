@@ -15,19 +15,26 @@ for (i in file_list) { #1A
    taxa <- unlist(strsplit(i,"/.*_blast.txt.summarized"))
    output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
    temp_output <- as.matrix(read.table(i)) 
-   for (j in 2:(dim(temp_output)[1])) { #2A
-      if(!(grepl(temp_output[j,1], output_matrix[,1]))) { #3A
-         if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
-            temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
-            temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
-            temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]                                        
+      for (j in 2:(dim(temp_output)[1])) { #2A
+         while (k <= pivot_col) { #10A
+            if(!(is.na(temp_output[j,k]))) { #11A
+               if(!(grepl(temp_output[j,k], output_matrix[,k]))) { #3A
+                  if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
+                     temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
+                     temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
+                     temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]                                        
                                                     
-         } else { #4AB this one is for problem loci
-            break
-         } #4B
-      } #3B                                                    
-   } #2B       
- } #1B       
+                  } else { #4AB this one is for problem loci
+                     break
+                  } #4B
+               } else { #3AB this is for when 
+                  break
+               } #3B
+           } #11B
+           k <- k + 1 
+        } #10B   
+    } #2B       
+} #1B       
     
 
 
