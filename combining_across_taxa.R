@@ -24,10 +24,13 @@ for (i in file_list) { #1A
             if(!(is.na(temp_output[j,k]))) { #11A         
                if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
                   locus_present <- "No"
+                  match_cols <- NULL
+                  match_rows <- NULL
                   for (p in 1:pivot_col) {
                      if(!(is.na(temp_output[j,p]))) {
                         if(temp_output[j,p] %in% output_matrix[,p]) {
-                           k <- p
+                           match_cols <- c(match_cols,p)
+                           match_rows <- unique(sort(c(match_rows,which(output_matrix[,p] %in% temp_output[j,p])))) 
                            locus_present <- "Yes"
                         }   
                      }   
@@ -48,11 +51,13 @@ for (i in file_list) { #1A
                      # the following needs to be modified so it can simultaneously match to multiple
                      # records, combine across them, remove them from the original output_matrix
                      # and then append to the bottom
+                     
+                     
                      m <- which(output_matrix[,k] %in% temp_output[j,k])
                      if(length(m)>1) {
                         stop("woah")
                      }   
-                     temp_row <- output_matrix[m,]
+                     temp_rows <- output_matrix[m,]
                      for (n in 1:pivot_col) { #40A
                         if(is.na(output_matrix[m,n])) { #41A
                            if(!(is.na(temp_output[j,n]))) { #42A
