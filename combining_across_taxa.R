@@ -24,12 +24,10 @@ for (i in file_list) { #1A
             if(!(is.na(temp_output[j,k]))) { #11A         
                if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
                   locus_present <- "No"
-                  match_cols <- NULL
                   match_rows <- NULL
                   for (p in 1:pivot_col) {
                      if(!(is.na(temp_output[j,p]))) {
                         if(temp_output[j,p] %in% output_matrix[,p]) {
-                           match_cols <- c(match_cols,p)
                            match_rows <- unique(sort(c(match_rows,which(output_matrix[,p] %in% temp_output[j,p])))) 
                            locus_present <- "Yes"
                         }   
@@ -45,7 +43,41 @@ for (i in file_list) { #1A
                      output_matrix <- rbind(output_matrix,temp_row)
                      k <- pivot_col+1
                   } else { #3AB 
-                     
+                     temp_row <- output_matrix[match_rows[1],]
+                     for (m in 1:length(temp_row)) {
+                        for (p in match_rows) {
+                           if (is.na(temp_row[m])) {
+                              temp_row[m] <- output_matrix[p,m]
+                           } else {
+                              if (!(is.na(output_matrix[p,m]))) {
+                                 if (!(temp_row[m]==output_matrix[p,m])) {
+                                    temp_row[m] <- paste(temp_row[m],",",output_matrix[p,m],sep="")
+                                    temp_row[length(temp_row)] <- "Y"
+                                 }
+                              }
+                           }
+                        }
+                     }
+                     for (m in 1:pivot_col) {                     
+                        if (is.na(temp_row[m])) {
+                           temp_row[m] <- temp_output[j,m]
+                        } else {
+                           if (!(is.na(temp_output[j,m]))) {
+                              if (!(temp_row[m]==temp_output[j,m])) {
+                                 temp_row[m] <- paste(temp_row[m],",",temp_output[j,m],sep="")
+                                 temp_row[length(temp_row)] <- "Y"
+                              }
+                           }
+                        }
+                     }
+                     temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
+                     temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]
+                     record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
+                     record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
+                     temp_row[record_taxa] <- paste(temp_row[record_taxa],taxa,",",sep="")
+                              
+                              
+                              
                      # OK, so here's what what's going on - the new taxa has a "rosetta" stone, that
                      # links two previous records
                      # the following needs to be modified so it can simultaneously match to multiple
