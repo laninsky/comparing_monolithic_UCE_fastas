@@ -23,7 +23,16 @@ for (i in file_list) { #1A
          while (k <= pivot_col) { #10A
             if(!(is.na(temp_output[j,k]))) { #11A         
                if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
-                  if(!(temp_output[j,k] %in% output_matrix[,k])) { #3A
+                  locus_present <- "No"
+                  for (p in 1:pivot_col) {
+                     if(!(is.na(temp_output[j,p]))) {
+                        if(temp_output[j,p] %in% output_matrix[,p]) {
+                           k <- p
+                           locus_present <- "Yes"
+                        }   
+                     }   
+                  }   
+                  if(locus_present=="No") { #3A
                      temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
                      temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
                      temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]
@@ -34,6 +43,9 @@ for (i in file_list) { #1A
                      k <- pivot_col+1
                   } else { #3AB 
                      m <- which(output_matrix[,k] %in% temp_output[j,k])
+                     if(length(m)>1) {
+                        stop("woah")
+                     }   
                      temp_row <- output_matrix[m,]
                      for (n in 1:pivot_col) { #40A
                         if(is.na(output_matrix[m,n])) { #41A
