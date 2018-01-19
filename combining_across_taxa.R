@@ -19,9 +19,11 @@ for (i in file_list) { #1A
    output_taxa <- which(grepl(taxa,output_matrix[1,])==TRUE)
    temp_output <- as.matrix(read.table(i)) 
       for (j in 2:(dim(temp_output)[1])) { #2A
+         print("inside for loop 2")
+         print(j)
          k <- 1
          while (k <= pivot_col) { #10A
-            if(!(is.na(temp_output[j,k]))) { #11A
+            if(!(is.na(temp_output[j,k]))) { #11A         
                if(temp_output[j,which(temp_output[1,]=="problem_locus")]=="N") { #4A
                   if(!(temp_output[j,k] %in% output_matrix[,k])) { #3A
                      temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
@@ -30,17 +32,19 @@ for (i in file_list) { #1A
                      output_matrix <- rbind(output_matrix,temp_row)
                      k <- pivot_col+1
                   } else { #3AB this is for when the locus IS in the output_matrix already, but it isn't a problem locus 
-                     break
+                     stop("woah!") #gonna have to have between taxa issues too
                   } #3B
                } else { #4AB this one is for problem loci - need to hold them somewhere until the end
-                  break
                   for (m in 1:pivot_col) { #20A
                      if(!(is.na(temp_output[j,m]))) { #21A
                         if(length(which(problem_taxa[,1]==taxa & problem_taxa[,2]==output_matrix[1,m]))<1) { #22A
                            temp_row <- c(taxa,output_matrix[1,m],temp_output[j,m])
                            problem_taxa <- rbind(problem_taxa,temp_row)
                          } else { #22AB - what to do if the length is more than 1
-                           break
+                           if (!(temp_output[j,m] %in% problem_taxa[(which(problem_taxa[,1]==taxa & problem_taxa[,2]==output_matrix[1,m])),3])) { #30A
+                              temp_row <- c(taxa,output_matrix[1,m],temp_output[j,m])
+                              problem_taxa <- rbind(problem_taxa,temp_row)
+                           } #30B   
                          } #22B
                       } #21B 
                    } #20A        
