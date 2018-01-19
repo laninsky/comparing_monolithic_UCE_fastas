@@ -9,7 +9,7 @@ temp_output <- as.matrix(read.table(file_list[1]))
 base_list <- temp_output[1,1:((which(temp_output[1,]=="max_length"))-1)]
 pivot_col <- which(temp_output[1,]=="max_length")-1
 
-output_matrix <- t(matrix(c(base_list,length_list,longbase_list,"between_taxa_problem")))
+output_matrix <- t(matrix(c(base_list,length_list,longbase_list,base_list,"between_taxa_problem")))
 problem_taxa <- t(matrix(c("taxa","base_genome","uce_locus")))
 
 for (i in file_list) { #1A
@@ -26,7 +26,10 @@ for (i in file_list) { #1A
                   if(!(temp_output[j,k] %in% output_matrix[,k])) { #3A
                      temp_row <- c(temp_output[j,1:pivot_col],rep(NA,(length(output_matrix[1,])-pivot_col)))
                      temp_row[output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
-                     temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]                                        
+                     temp_row[output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]
+                     record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
+                     record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
+                     temp_row[record_taxa] <- paste(",",taxa,sep="")
                      output_matrix <- rbind(output_matrix,temp_row)
                      k <- pivot_col+1
                   } else { #3AB 
@@ -35,21 +38,25 @@ for (i in file_list) { #1A
                      for (n in 1:pivot_col) { #40A
                         if(is.na(output_matrix[m,n])) { #41A
                            if(!(is.na(temp_output[j,n]))) { #42A
-                              temp_row[k] <- temp_output[j,n]
+                              temp_row[n] <- temp_output[j,n]
                            } #42B
                         } else { #41AB
                            if(!(is.na(temp_output[j,n]))) { #42A
-                              if(!(temp_row[k]==temp_output[j,n])) { #43B
-                                 temp_row[k] <- paste(temp_row[k],"_",temp_output[j,n],sep="")
+                              if(!(temp_row[n]==temp_output[j,n])) { #43B
+                                 stop("woah")
+                                 temp_row[n] <- paste(temp_row[n],"_",temp_output[j,n],sep="")
                                  temp_row[length(temp_row)] <- "Y"
                               } #43B   
                            } #42B
                        } #41B
-                    } #40B  
-                    output_matrix[m,] <- temp_row             
-                              
-                           
-                     
+                    } #40B
+                    record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
+                    record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
+                    temp_row[record_taxa] <- paste(",",temp_row[record_taxa],taxa,sep="") 
+                    output_matrix[m,] <- temp_row
+                    output_matrix[m,output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
+                    output_matrix[m,output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]  
+                    k <- pivot_col+1                               
                   } #3B
                } else { #4AB this one is for problem loci - need to hold them somewhere until the end
                   for (m in 1:pivot_col) { #20A
