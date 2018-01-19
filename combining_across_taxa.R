@@ -63,8 +63,8 @@ for (i in file_list) { #1A
                     } #40B
                     record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
                     record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
-                    temp_row[record_taxa] <- paste(temp_row[record_taxa],",",taxa,sep="")
-                    temp_row[record_taxa] <- gsub("NA","NA,",temp_row[record_taxa])
+                    temp_row[record_taxa] <- paste(temp_row[record_taxa],taxa,",",sep="")
+                    temp_row[record_taxa] <- gsub("NA,","",temp_row[record_taxa])
                     output_matrix[m,] <- temp_row
                     output_matrix[m,output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
                     output_matrix[m,output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]  
