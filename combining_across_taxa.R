@@ -42,6 +42,12 @@ for (i in file_list) { #1A
                      output_matrix <- rbind(output_matrix,temp_row)
                      k <- pivot_col+1
                   } else { #3AB 
+                     
+                     # OK, so here's what what's going on - the new taxa has a "rosetta" stone, that
+                     # links two previous records
+                     # the following needs to be modified so it can simultaneously match to multiple
+                     # records, combine across them, remove them from the original output_matrix
+                     # and then append to the bottom
                      m <- which(output_matrix[,k] %in% temp_output[j,k])
                      if(length(m)>1) {
                         stop("woah")
