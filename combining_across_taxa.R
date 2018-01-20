@@ -77,6 +77,7 @@ for (i in file_list) { #1A
                      record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
                      record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
                      temp_row[record_taxa] <- paste(temp_row[record_taxa],taxa,",",sep="")
+                     temp_row[record_taxa] <- gsub("NA","",temp_row[record_taxa])
                      output_matrix <- output_matrix[-match_rows,]
                      output_matrix <- rbind(output_matrix,temp_row)
                      k <- pivot_col+1         
