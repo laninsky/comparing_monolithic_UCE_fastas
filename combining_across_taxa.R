@@ -75,43 +75,9 @@ for (i in file_list) { #1A
                      record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
                      record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
                      temp_row[record_taxa] <- paste(temp_row[record_taxa],taxa,",",sep="")
-                              
-                              
-                              
-                     # OK, so here's what what's going on - the new taxa has a "rosetta" stone, that
-                     # links two previous records
-                     # the following needs to be modified so it can simultaneously match to multiple
-                     # records, combine across them, remove them from the original output_matrix
-                     # and then append to the bottom
-                     
-                     
-                     m <- which(output_matrix[,k] %in% temp_output[j,k])
-                     if(length(m)>1) {
-                        stop("woah")
-                     }   
-                     temp_rows <- output_matrix[m,]
-                     for (n in 1:pivot_col) { #40A
-                        if(is.na(output_matrix[m,n])) { #41A
-                           if(!(is.na(temp_output[j,n]))) { #42A
-                              temp_row[n] <- temp_output[j,n]
-                           } #42B
-                        } else { #41AB
-                           if(!(is.na(temp_output[j,n]))) { #42A
-                              if(!(temp_row[n]==temp_output[j,n])) { #43B
-                                 temp_row[n] <- paste(temp_row[n],",",temp_output[j,n],sep="")
-                                 temp_row[length(temp_row)] <- "Y"
-                              } #43B   
-                           } #42B
-                       } #41B
-                    } #40B
-                    record_taxa <- which(output_matrix[1,] %in% output_matrix[1,which(!(is.na(temp_output[j,1:pivot_col])))])
-                    record_taxa <- record_taxa[((length(record_taxa)/2)+1):length(record_taxa)]
-                    temp_row[record_taxa] <- paste(temp_row[record_taxa],taxa,",",sep="")
-                    temp_row[record_taxa] <- gsub("NA,","",temp_row[record_taxa])
-                    output_matrix[m,] <- temp_row
-                    output_matrix[m,output_taxa[1]] <- temp_output[j,which(temp_output[1,]=="max_length")]
-                    output_matrix[m,output_taxa[2]] <- temp_output[j,which(temp_output[1,]=="which_base_gives_max" )]  
-                    k <- pivot_col+1                               
+                     output_matrix <- output_matrix[-match_rows,]
+                     output_matrix <- rbind(output_matrix,temp_row)
+                     k <- pivot_col+1         
                   } #3B
                } else { #4AB this one is for problem loci - need to hold them somewhere until the end
                   for (m in 1:pivot_col) { #20A
