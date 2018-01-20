@@ -11,6 +11,11 @@ If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_f
 
 You also need to point to the BLAST binaries folder by setting the following variable before starting
 ```
-exoprt BLASTPATH=path/to/bin
+export BLASTPATH=path/to/bin
 e.g. export BLASTPATH=/Users/alanaalexander/bin/ncbi-blast-2.7.1+/bin
+```
+
+Finally, you'll need to set the BLAST matching similarity threshold e.g.
+```
+export BLASTSIM=0.95
 ```
