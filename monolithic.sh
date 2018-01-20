@@ -17,7 +17,7 @@ $BLASTPATH/makeblastdb -in $blaster -dbtype nucl;
 outfile_name="`echo $i | sed 's/\///g'`"_blast.txt"";
 for k in `seq $(( j + 1 )) $no_base_genomes`;
 do blastee="`head -n $k base_genomes.txt | tail -n 1`"ucelocus.txt"";
-$BLASTPATH/blastn -db $blaster -query $blastee -perc_identity 95 -outfmt '10 qseqid sseqid qlen slen' > temp;
+$BLASTPATH/blastn -db $blaster -query $blastee -perc_identity $BLASTSIM -outfmt '10 qseqid sseqid qlen slen' > temp;
 sed "s|^|$blaster,$blastee,|g" temp >> $outfile_name;
 rm temp;
 done;
