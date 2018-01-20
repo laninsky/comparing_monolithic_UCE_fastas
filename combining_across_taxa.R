@@ -112,4 +112,6 @@ for (j in 2:(dim(problem_taxa)[1])) {
    problem_col <- (grep(problem_taxa[j,2],output_matrix[1,]))[2]
    output_matrix[problem_row,problem_col] <- paste(output_matrix[problem_row,problem_col],problem_taxa[j,1],"_prob_w,",sep="")
    output_matrix[problem_row,problem_col] <- gsub("NA","",output_matrix[problem_row,problem_col])
-}   
+}
+
+write.table(output_matrix,"output_matrix.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
