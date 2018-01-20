@@ -52,7 +52,7 @@ for (i in file_list) { #1A
                               if (!(is.na(output_matrix[p,m]))) {
                                  if (!(temp_row[m]==output_matrix[p,m])) {
                                     temp_row[m] <- paste(temp_row[m],",",output_matrix[p,m],sep="")
-                                    temp_row[m] <- gsub("NA","",temp_row[m]
+                                    temp_row[m] <- gsub("NA","",temp_row[m])
                                     temp_row[length(temp_row)] <- "Y"
                                  }
                               }
@@ -66,7 +66,7 @@ for (i in file_list) { #1A
                            if (!(is.na(temp_output[j,m]))) {
                               if (!(temp_row[m]==temp_output[j,m])) {
                                  temp_row[m] <- paste(temp_row[m],",",temp_output[j,m],sep="")
-                                 temp_row[m] <- gsub("NA","",temp_row[m]
+                                 temp_row[m] <- gsub("NA","",temp_row[m])
                                  temp_row[length(temp_row)] <- "Y"
                               }
                            }
