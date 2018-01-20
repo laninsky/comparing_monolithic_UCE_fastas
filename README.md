@@ -15,7 +15,7 @@ export BLASTPATH=path/to/bin
 e.g. export BLASTPATH=/Users/alanaalexander/bin/ncbi-blast-2.7.1+/bin
 ```
 
-Finally, you'll need to set the BLAST matching similarity threshold e.g.
+Finally, you'll need to set the BLAST matching similarity percentage threshold e.g.
 ```
-export BLASTSIM=0.95
+export BLASTSIM=95
 ```
