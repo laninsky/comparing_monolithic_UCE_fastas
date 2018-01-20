@@ -104,11 +104,12 @@ for (i in file_list) { #1A
     } #2B       
 } #1B       
     
-
-
-problem_loci_coords <- which(temp_output[,(which(temp_output[1,]=="problem_locus"))]=="Y")
-problem_loci <- temp_output[problem_loci_coords,]
-temp_output <- temp_output[-problem_loci_coords,]
-
-first_column <- c("rosetta_locus",rep(NA,(dim(temp_output)[1]-1)))
-temp_output <- cbind(first_column,temp_output)
+for (j in 2:(dim(problem_taxa)[1])) {
+   problem_col <- (grep(problem_taxa[j,2],output_matrix[1,]))[1]
+   problem_row <- which(output_matrix[,problem_col]==problem_taxa[j,3])
+   taxa_col <- grep(problem_taxa[j,1],output_matrix[1,])
+   output_matrix[problem_row,taxa_col] <- "problem_within"
+   problem_col <- (grep(problem_taxa[j,2],output_matrix[1,]))[2]
+   output_matrix[problem_row,problem_col] <- paste(output_matrix[problem_row,problem_col],problem_taxa[j,1],"_prob_w,",sep="")
+   output_matrix[problem_row,problem_col] <- gsub("NA","",output_matrix[problem_row,problem_col])
+}   
