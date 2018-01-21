@@ -105,11 +105,11 @@ for (i in file_list) { #1A
 } #1B       
     
 for (j in 2:(dim(problem_taxa)[1])) {
-   problem_col <- (grep(problem_taxa[j,2],output_matrix[1,]))[1]
+   problem_col <- which(output_matrix[1,] %in% problem_taxa[j,2])[1]
    problem_row <- which(output_matrix[,problem_col]==problem_taxa[j,3])
    taxa_col <- grep(problem_taxa[j,1],output_matrix[1,])
    output_matrix[problem_row,taxa_col] <- "problem_within"
-   problem_col <- (grep(problem_taxa[j,2],output_matrix[1,]))[2]
+   problem_col <-  which(output_matrix[1,] %in% problem_taxa[j,2])[2]
    output_matrix[problem_row,problem_col] <- paste(output_matrix[problem_row,problem_col],problem_taxa[j,1],"_prob_w,",sep="")
    output_matrix[problem_row,problem_col] <- gsub("NA","",output_matrix[problem_row,problem_col])
 }
