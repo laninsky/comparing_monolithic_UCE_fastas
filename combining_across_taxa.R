@@ -27,7 +27,7 @@ for (i in file_list) { #1A
                   match_rows <- NULL
                   for (p in 1:pivot_col) {
                      if(!(is.na(temp_output[j,p]))) {
-                        if(grep(paste(temp_output[j,p],"(,|$)",sep=""),output_matrix[,p])) { # check this grep function
+                        if(length(grep(paste(temp_output[j,p],"(,|$)",sep=""),output_matrix[,p]))>0) { # check this grep function
                            match_rows <- unique(sort(c(match_rows,(grep(paste(temp_output[j,p],"(,|$)",sep=""),output_matrix[,p])))))
                            locus_present <- "Yes"
                         }   
