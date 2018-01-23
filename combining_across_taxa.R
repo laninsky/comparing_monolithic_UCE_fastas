@@ -13,6 +13,10 @@ output_matrix <- t(matrix(c(base_list,length_list,longbase_list,base_list,"betwe
 problem_taxa <- t(matrix(c("taxa","base_genome","uce_locus")))
 
 for (i in file_list) { #1A
+   print("Up to:")
+   print(i)
+   print("Out of:")
+   print(file_list)
    taxa <- unlist(strsplit(i,"/",fixed=TRUE))
    taxa <- taxa[length(taxa)]
    taxa <- unlist(strsplit(taxa,"_blast.txt.summarized"))
@@ -103,10 +107,11 @@ for (i in file_list) { #1A
         } #10B   
     } #2B       
 } #1B       
-    
+
+print("Now processing the loci that had problematic matches across base genomes within taxa")
 for (j in 2:(dim(problem_taxa)[1])) {
    problem_col <- which(output_matrix[1,] %in% problem_taxa[j,2])[1]
-   problem_row <- which(output_matrix[,problem_col]==problem_taxa[j,3])
+   problem_row <- grep(paste(problem_taxa[j,3],"(,|$)",sep=""),output_matrix[,problem_col])
    taxa_col <- grep(problem_taxa[j,1],output_matrix[1,])
    output_matrix[problem_row,taxa_col] <- "problem_within"
    problem_col <-  which(output_matrix[1,] %in% problem_taxa[j,2])[2]
