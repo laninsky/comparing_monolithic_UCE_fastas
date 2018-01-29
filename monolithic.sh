@@ -29,3 +29,6 @@ done
 # predicated on which base genome was used.
 
 Rscript blast_summary.R
+
+# Taking the taxa specific summaries and combining across them
+Rscript combining_across_taxa.R
