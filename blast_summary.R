@@ -30,7 +30,7 @@ for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
              } #1B
            } #2B
            output_matrix <- rbind(output_matrix,temp_row)  
-        # TO DO  what to do if temp[j,3] is already in there, but temp[j,4] is not  
+        # what to do if temp[j,3] is already in there, but temp[j,4] is not  
         } else { #5AB
           # if there is no value in the output_matrix for the [j,2] base genome
           if(all(is.na(output_matrix[(which(output_matrix[,which(output_matrix[1,]==temp[j,1])]==(temp[j,3]))),which(output_matrix[1,]==temp[j,2])]))) { #10A
