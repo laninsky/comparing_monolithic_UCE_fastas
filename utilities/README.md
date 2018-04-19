@@ -15,13 +15,14 @@ And then carried out the following code to get a separate fasta file per locus, 
 ```
 numberofloci=`wc -l file_locus.txt | awk '{print $1}'`
 for i in amphizoa bemhap1 chlSer1 lioTuu1 omoHam1 pterMel1 traGib1;
-do for j in seq 1 $numberofloci;
+do for j in `seq 1 $numberofloci`;
 do currentline=`head -n $j file_locus.txt | tail -n 1`;
 basefile=$i/`echo $currentline | awk '{print $1}'`;
 locusname=`echo $currentline | awk '{print $2}'`;
-
-
-
-grep -n pattern file.txt | cut -d : -f 1
-
+lineno=`grep -n ${locusname}$ $basefile | cut -d : -f 1`;
+lineno=$((lineno+1));
+echo ">""$i" >> fastas/uce-$j.fasta;
+head -n $lineno $basefile | tail -n 1 >> fastas/uce-$j.fasta;
+done;
+done;
 ```
