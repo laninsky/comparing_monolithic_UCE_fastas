@@ -7,8 +7,8 @@ for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
      if (temp[j,3] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,1])]) { #4A
         # what to do if both [j,3] and [j,4] are already there
         if (temp[j,4] %in% output_matrix[1:(dim(output_matrix)[1]),which(output_matrix[1,]==temp[j,2])]) { #5A
-          # what to do if [j,3] and [j,4] are already in the matrix but not on the same row (shouldn't happen?)
-          if ((which(output_matrix[,which(output_matrix[1,]==temp[j,1])]==temp[j,3]))!=(which(output_matrix[,which(output_matrix[1,]==temp[j,2])]==temp[j,4]))) { #IF1
+          # what to do if [j,3] or [j,4] are already in the matrix but on multiple rows (i.e. problematic)
+          if (length((which(output_matrix[,which(output_matrix[1,]==temp[j,1])]==temp[j,3])))!=1 | length(which(output_matrix[,which(output_matrix[1,]==temp[j,2])]==temp[j,4]))!=1) { #IF1
             output_matrix[which(output_matrix[,which(output_matrix[1,]==temp[j,1])]==temp[j,3]),which(output_matrix[1,]=="problem_locus")] <- "Y"
             output_matrix[which(output_matrix[,which(output_matrix[1,]==temp[j,2])]==temp[j,4]),which(output_matrix[1,]=="problem_locus")] <- "Y"
             temp_row <- t(matrix(NA,nrow=dim(output_matrix)[2]))
