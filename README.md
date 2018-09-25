@@ -24,3 +24,5 @@ After doing all of this, start it off by:
 ```
 bash monolithic.sh
 ```
+
+The utilities folder in this repository contains scripts for extracting the 'good' UCE loci (loci that do not appear to be paralogous in any lineage, and that are found in every lineage), and also for whittling down the probe file to target just these loci.
