@@ -28,4 +28,5 @@ done;
 done;
 ```
 
-# Whittling the probes fasta file down to only these loci
+# Whittling the probes fasta file down to only a subset of loci
+
