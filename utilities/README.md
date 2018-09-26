@@ -29,4 +29,14 @@ done;
 ```
 
 # Whittling the probes fasta file down to only a subset of loci
+To use, paste whittle_uce_probes.R into your R console.
 
+This code will whittle down your probe_fasta_file by loci that are present in your monolithic_output_name file and that are not 'problematic' (i.e. paralagous) within or between taxa. To run this code:"
+```
+whittle_uce_probes(monolithic_output_name,probe_fasta_file,basename)
+```
+where monolithic_output_name is an output file from comparing_monolithic_UCE_fastas/monolithic.sh, probe_fasta_file is the output probes file from the phyluce pipeline, and basename is the name of the taxa that you designed your final probeset across"
+e.g.
+```
+whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1")
+```
