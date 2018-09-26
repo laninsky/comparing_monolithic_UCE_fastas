@@ -1,8 +1,12 @@
-probe_fasta_file <- "/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta"
-monolithic_output_name <- "/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt"
-basename <- "Pterostichus.1"
-
 whittle_uce_probes <- function(monolithic_output_name,probe_fasta_file,basename) {
+  print("This code will whittle down your probe_fasta_file by loci that are present in your monolithic_output_name file")
+  print("and that are not 'problematic' (i.e. paralagous) within or between taxa. To run this code:")
+  print("whittle_uce_probes(monolithic_output_name,probe_fasta_file,basename)")
+  print("where monolithic_output_name is an output file from comparing_monolithic_UCE_fastas/monolithic.sh")
+  print("probe_fasta_file is the output probes file from the phyluce pipeline")
+  print("and basename is the name of the taxa that you designed your final probeset across")
+  print("e.g.")
+  cat('whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1")\n')
   
   if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
   
@@ -56,10 +60,12 @@ whittle_uce_probes <- function(monolithic_output_name,probe_fasta_file,basename)
   }  
   
   headerlines <- unique(headerlines)
-  headerlines <- c(headerlines,(headerlines+1))
-  outputmatrix <- outputmatrix[headerlines,]
+  headerlines <- sort(c(headerlines,(headerlines+1)))
+  outputmatrix <- matrix(outputmatrix[headerlines,],ncol=1)
   
-  write.table(outputmatrix,"whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quotes=FALSE)
+  write.table(outputmatrix,"whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
+  
+  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",(dim(temp)[1])," loci have been written out to ",getwd(),"/whittled_UCE_probes.fasta",sep=""))
 }  
   
   
