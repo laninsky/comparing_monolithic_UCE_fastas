@@ -29,7 +29,7 @@ done;
 ```
 
 # Whittling the probes fasta file down to only a subset of loci
-To use, paste whittle_uce_probes.R into your R console.
+To use, paste the contents of whittle_uce_probes.R into your R console.
 
 This code will whittle down your probe_fasta_file by loci that are present in your monolithic_output_name file and that are not 'problematic' (i.e. paralagous) within or between taxa. To run this code:"
 ```
