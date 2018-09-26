@@ -40,7 +40,7 @@ whittle_uce_probes <- function(monolithic_output_name,probe_fasta_file,basename)
   
   # Filtering out loci that have problems within taxa
   for (i in grep("_longest_base_genome",names(temp))) {
-    temp <- filter(temp,temp[,i]!="problem_within")
+    temp <- filter(temp,temp[,i]!="problem_within" | is.na(temp[,i]))
   }  
   
   # Taking just the uce-locus names for the basename in our probe_fasta_file
