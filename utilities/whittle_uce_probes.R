@@ -2,13 +2,15 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type
   print("This code will whittle down your probe_fasta_file by loci that are present in your uce_list_file")
   print("file and that are not 'problematic' (i.e. paralagous) within or between taxa. To run this code:")
   print("whittle_uce_probes(uce_list_file,probe_fasta_file,basename)")
-  print("where uce_list_file is an output file from comparing_monolithic_UCE_fastas/monolithic.sh,")
+  print("where uce_list_file is an output file from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci,")
   print("probe_fasta_file is the output probes file from the phyluce pipeline,")
-  print("basename is the name of the taxa that you designed your final probeset across")
+  print("basename is the name of the taxa that you designed your final probeset across. You can use a place holder name") 
+  print('if you did not design the propes e.g. "whatever"')
   print("file_type is the type of file used to whittle i.e. output from monolithic.sh or a list of uce loci")
   print("e.g.")
   cat('whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1","monolithic")\n')
-  cat('whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","Pterostichus.1","file_list")\n')
+  cat('whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","whatever","file_list")\n')
+  
   
   if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
   
