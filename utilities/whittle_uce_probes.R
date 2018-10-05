@@ -64,7 +64,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type
 
   
   for (i in 1:dim(temp)[1]) {
-    headerlines <- c(headerlines,which(grepl(temp[i,1],outputmatrix[,1])))
+    headerlines <- c(headerlines,which(grepl(paste(temp[i,1],"[^0-9]",sep=""),outputmatrix[,1])))
     if ((i %% 100)==0) {
      print(paste("We are ",round((i/dim(temp)[1])*100),"% through the file",sep=""))
     }
