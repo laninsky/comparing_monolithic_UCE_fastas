@@ -34,26 +34,30 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type
   }
   outputmatrix[(dim(outputmatrix)[1]),] <- tempseq
   
-  # Reading in the monolithic output
-  temp <- read.table(uce_list_file,stringsAsFactors=FALSE,header=TRUE)
+  if (file_type=="monolithic") {
+    # Reading in the monolithic output
+    temp <- read.table(uce_list_file,stringsAsFactors=FALSE,header=TRUE)
   
-  # Filtering out loci that have between_taxa_problems
-  temp <- filter(temp,is.na(between_taxa_problem))
+    # Filtering out loci that have between_taxa_problems
+    temp <- filter(temp,is.na(between_taxa_problem))
   
-  # Filtering out loci that have problems within taxa
-  for (i in grep("_longest_base_genome",names(temp))) {
-    temp <- filter(temp,temp[,i]!="problem_within" | is.na(temp[,i]))
-  }  
+    # Filtering out loci that have problems within taxa
+    for (i in grep("_longest_base_genome",names(temp))) {
+      temp <- filter(temp,temp[,i]!="problem_within" | is.na(temp[,i]))
+    }  
   
-  # Taking just the uce-locus names for the basename in our probe_fasta_file
-  temp <- select(temp,grep(basename,names(temp))[1])
+    # Taking just the uce-locus names for the basename in our probe_fasta_file
+    temp <- select(temp,grep(basename,names(temp))[1])
   
-  # Removing any is.na rows
-  temp <- filter(temp,!is.na(temp[,1]))
+    # Removing any is.na rows
+    temp <- filter(temp,!is.na(temp[,1]))
   
-  # Getting the lines of the probe file that are found in our list of "keeper" loci
-  headerlines <- NULL
-  
+    # Getting the lines of the probe file that are found in our list of "keeper" loci
+    headerlines <- NULL
+ } else {
+    temp <- read.table(uce_list_file,stringsAsFactors=FALSE,header=TRUE)
+ }   
+    
   for (i in 1:dim(temp)[1]) {
     headerlines <- c(headerlines,which(grepl(temp[i,1],outputmatrix[,1])))
     if ((i %% 100)==0) {
