@@ -9,9 +9,9 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type
   print("file_type is the type of file used to whittle i.e. output from monolithic.sh or a list of uce loci")
   print("e.g.")
   cat('whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1","monolithic")\n')
+  print("e.g.")
   cat('whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","whatever","file_list")\n')
-  
-  
+    
   if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
   
   # Reading in probe_fasta_file
