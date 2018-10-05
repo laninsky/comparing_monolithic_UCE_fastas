@@ -31,7 +31,7 @@ done;
 # Whittling the probes fasta file down to only a subset of loci
 To use, paste the contents of whittle_uce_probes.R into your R console.
 
-This code will whittle down your probe_fasta_file by loci that are present in a list of uce_loci (file_type = "uce_list"), or based on uce loci in your monolithic_output_name file and that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic"). To run this code:"
+This code will whittle down your probe_fasta_file by loci that are present in a list of uce_loci (file_type = "uce_list"), or based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic"). To run this code:"
 ```
 whittle_uce_probes(uce_list_file,probe_fasta_file,basename,file_type)
 ```
