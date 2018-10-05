@@ -33,10 +33,23 @@ To use, paste the contents of whittle_uce_probes.R into your R console.
 
 This code will whittle down your probe_fasta_file by loci that are present in your monolithic_output_name file and that are not 'problematic' (i.e. paralagous) within or between taxa. To run this code:"
 ```
-whittle_uce_probes(monolithic_output_name,probe_fasta_file,basename)
+whittle_uce_probes(uce_list_file,probe_fasta_file,basename,file_type)
 ```
-where monolithic_output_name is an output file from comparing_monolithic_UCE_fastas/monolithic.sh, probe_fasta_file is the output probes file from the phyluce pipeline, and basename is the name of the taxa that you designed your final probeset across"
-e.g.
+where uce_list_file is either the output from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci (depending on what you put for file_type), probe_fasta_file is the output probes file from the phyluce pipeline, basename is the name of the taxa that you designed your final probeset across, and file_type is either "monolithic" for the output of comparing_monolithic_UCE_fastas/monolithic.sh or "file_list" for a flat file with a list of uce loci separated by each line. Make sure your loci in the list are named the same as in your probe file e.g.
 ```
-whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1")
+uce-100
+uce-1011
+uce-1017
+uce-1023
+uce-1025
+
+```
+An example of running the code with monolithic.sh output e.g.
+```
+whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1","monolithic")
+```
+
+An example of running the code with a uce locus file e.g.
+```
+whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","Pterostichus.1","file_list")
 ```
