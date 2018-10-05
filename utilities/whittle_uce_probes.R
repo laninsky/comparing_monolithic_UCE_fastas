@@ -1,3 +1,10 @@
+uce_list_file <- "C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt"
+probe_fasta_file <- "C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1"
+basename <- "whatever"
+file_type <- "uce_list"
+  
+
+
 whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type) {
   print("This code will whittle down your probe_fasta_file by loci that are present in your uce_list_file")
   print("(and that are not 'problematic' i.e. paralagous within or between taxa if you are using the output")
@@ -56,7 +63,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type
     temp <- filter(temp,!is.na(temp[,1]))
   
  } else {
-    temp <- read.table(uce_list_file,stringsAsFactors=FALSE,header=TRUE)
+    temp <- read.table(uce_list_file,stringsAsFactors=FALSE,header=FALSE)
  }   
 
   # Getting the lines of the probe file that are found in our list of "keeper" loci
