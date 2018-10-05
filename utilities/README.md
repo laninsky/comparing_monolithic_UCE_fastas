@@ -35,7 +35,7 @@ This code will whittle down your probe_fasta_file by loci that are present in yo
 ```
 whittle_uce_probes(uce_list_file,probe_fasta_file,basename,file_type)
 ```
-where uce_list_file is either the output from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci (depending on what you put for file_type), probe_fasta_file is the output probes file from the phyluce pipeline, basename is the name of the taxa that you designed your final probeset across, and file_type is either "monolithic" for the output of comparing_monolithic_UCE_fastas/monolithic.sh or "file_list" for a flat file with a list of uce loci separated by each line. Make sure your loci in the list are named the same as in your probe file e.g.
+where uce_list_file is either the output from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci (depending on what you put for file_type), probe_fasta_file is the output probes file from the phyluce pipeline, basename is the name of the taxa that you designed your final probeset across (if you designed your own probe set, otherwise this can just be a placeholder e.g. "whatever"), and file_type is either "monolithic" for the output of comparing_monolithic_UCE_fastas/monolithic.sh or "file_list" for a flat file with a list of uce loci separated by each line. Make sure your loci in the list are named the same as in your probe file e.g.
 ```
 uce-100
 uce-1011
@@ -51,5 +51,5 @@ whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/o
 
 An example of running the code with a uce locus file e.g.
 ```
-whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","Pterostichus.1","file_list")
+whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","whatever","file_list")
 ```
