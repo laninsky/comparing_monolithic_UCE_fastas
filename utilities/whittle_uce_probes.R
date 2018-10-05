@@ -1,8 +1,8 @@
 whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type) {
   print("This code will whittle down your probe_fasta_file by loci that are present in your uce_list_file")
-  print("and that are not 'problematic' (i.e. paralagous) within or between taxa (if you are using the output")
-  print("from comparing_monolithic_UCE_fastas/monolithic.sh. To run this code:")
-  print("whittle_uce_probes(uce_list_file,probe_fasta_file,basename)")
+  print("(and that are not 'problematic' i.e. paralagous within or between taxa if you are using the output")
+  print("from comparing_monolithic_UCE_fastas/monolithic.sh). To run this code:")
+  print("whittle_uce_probes(uce_list_file,probe_fasta_file,basename,file_type)")
   print("where uce_list_file is an output file from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci,")
   print("probe_fasta_file is the output probes file from the phyluce pipeline,")
   print("basename is the name of the taxa that you designed your final probeset across. You can use a place holder name") 
