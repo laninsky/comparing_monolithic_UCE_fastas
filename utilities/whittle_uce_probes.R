@@ -52,12 +52,14 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,basename,file_type
     # Removing any is.na rows
     temp <- filter(temp,!is.na(temp[,1]))
   
-    # Getting the lines of the probe file that are found in our list of "keeper" loci
-    headerlines <- NULL
  } else {
     temp <- read.table(uce_list_file,stringsAsFactors=FALSE,header=TRUE)
  }   
-    
+
+  # Getting the lines of the probe file that are found in our list of "keeper" loci
+  headerlines <- NULL
+
+  
   for (i in 1:dim(temp)[1]) {
     headerlines <- c(headerlines,which(grepl(temp[i,1],outputmatrix[,1])))
     if ((i %% 100)==0) {
