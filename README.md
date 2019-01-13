@@ -1,4 +1,4 @@
-# comparing_monolithic_UCE_fastas
+# comparing_monolithic_UCE_fastas v0.0
 ### Blasting between monolithic UCE fasta files to find out which loci are shared between different base genomes
 
 This repository came about because we had 7 different monolithic fasta files containing all UCE loci for all taxa, identified using different base genomes. The idea with this script was to create a "rosetta" stone via BLAST to match up loci identified using different base genomes, so that we could look at the effect of different base genomes on the ability for different UCE loci to be identified in different taxa.
@@ -38,5 +38,8 @@ R: A Language and Environment for Statistical Computing. R Core Team. R Foundati
 
 Along with the programs above, to cite this pipeline:
 ```
-TBD
+Alexander, A. 2018. comparing_monolithic_UCE_fastas v0.0. Available from: https://github.com/laninsky/comparing_monolithic_UCE_fastas
 ```
+
+### Version history
+0.0: Version used in TBD
