@@ -39,7 +39,9 @@ R: A Language and Environment for Statistical Computing. R Core Team. R Foundati
 Along with the programs above, to cite this pipeline:
 ```
 Alexander, A. 2018. comparing_monolithic_UCE_fastas v0.0. Available from: https://github.com/laninsky/comparing_monolithic_UCE_fastas
+
+Gustafson, G.T., Alexander, A., Sproul, J.S., Pflug, J.M., Maddison, D.R. and Short, A.E., 2019. Ultraconserved element (UCE) probe set design: Base genome and initial design parameters critical for optimization. Ecology and Evolution.
 ```
 
 ### Version history
-0.0: Version used in TBD
+0.0: Version used in Gustafson et al. (2019)
