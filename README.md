@@ -51,7 +51,7 @@ ATTTTAACTCTCCATTATAAGAACTGAATTTCTACTGAACAGTGCCAACACAATTTACCT
 ```
 Contained in this file is every single UCE locus identified in each of the four taxa, using liocanthydrus as the base genome.
   
-The first major step ([Line 6](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to go into each of the monolithic fasta files, and pull out all the loci for each taxa and then dump them into separate directories. Inside these directories, the loci for that taxa are separated out subdirectories corresponding to the base genome they are found in e.g. (for liocanthydrus again):
+The first major step ([Line 6](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to go into each of the monolithic fasta files, and pull out all the loci for each taxon and then dump them into separate directories. Inside these directories, the loci for that taxon are separated out into subdirectories corresponding to the base genome they are found in e.g. (for liocanthydrus again):
 ```
 |-liocanthydrus
 	 |- liocanthydrus_insilico-incomplete.fasta
@@ -66,7 +66,7 @@ The first major step ([Line 6](https://github.com/laninsky/comparing_monolithic_
 
 The next step ([Lines 8-31](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to blast between the UCE loci found using different base genomes, within a taxon. We are doing this because if, for example for liocanthydrus the locus `uce-10001` derived using neohydrocoptus as a base genome matches to two UCE loci derived using another base genome, say `uce-987` and `uce-118947` using suphisellus as the base genome, then that locus looks to be paralagous within the liocanthydrus genome (or at least similar enough it is likely to cause issues in downstream analyses).
 
-The BLAST results from this are written out into the directory of each taxa as taxaname_blast.txt:
+The BLAST results from this are written out into the directory of each taxon as taxaname_blast.txt:
 ```
 |-liocanthydrus
 	 |- liocanthydrus_blast.txt
@@ -88,24 +88,43 @@ The BLAST results from this are written out into the directory of each taxa as t
 	 |- suphisellus-insilico-incomplete.fasta
 		 |- ucelocus.txt     
 |-neohydrocoptus
-   |- neohydrocoptus_blast.txt
+   	 |- neohydrocoptus_blast.txt
 	 |- liocanthydrus_insilico-incomplete.fasta (collapsed)
 	 |- neohydrocoptus-insilico-incomplete.fasta (collapsed)
 	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
 	 |- suphisellus-insilico-incomplete.fasta  (collapsed) 
 |-sternocanthus
-   |- sternocanthus_blast.txt
+   	 |- sternocanthus_blast.txt
 	 |- liocanthydrus_insilico-incomplete.fasta (collapsed)
 	 |- neohydrocoptus-insilico-incomplete.fasta (collapsed)
 	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
 	 |- suphisellus-insilico-incomplete.fasta (collapsed)  
 |-suphisellus
-   |- suphisellus_blast.txt
+   	 |- suphisellus_blast.txt
 	 |- liocanthydrus_insilico-incomplete.fasta (collapsed)
 	 |- neohydrocoptus-insilico-incomplete.fasta (collapsed)
 	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
 	 |- suphisellus-insilico-incomplete.fasta (collapsed) 
 ```
+You might note that in the above file tree, tht within the liocanthydrus folder the subfolder suphisellus-insilico-incomplete.fasta does not have any \*.nsq, \*.nin, or \*.nhr files. This is because we only do one-way blast comparisons between the base genomes, and the suphisellus-derived UCE loci for liocanthydrus have already been compared to all the other genomes (who do have blast databases created for this comparison).
+
+For each taxon, the blast results are then summarized to determine presence/absence of each locus in each taxon ([Line 36](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) e.g. for the liocanthydrus directory:
+```
+|-liocanthydrus
+	 |- liocanthydrus_blast.txt
+	 |- liocanthydrus_blast.txt.summarized
+	 |- liocanthydrus_insilico-incomplete.fasta
+	 |- neohydrocoptus-insilico-incomplete.fasta
+	 |- sternocanthus-insilico-incomplete.fasta
+	 |- suphisellus-insilico-incomplete.fasta
+```
+
+And then finally these results are summarized across all of the taxa ([Line 39](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) and written out as "output_matrix.txt":
+|- output_matrix.txt
+|- liocanthydrus (collapsed)
+|- neohydrocoptus (collapsed)
+|- sternocanthus (collapsed)
+|- suphisellus (collapsed)
 
 
 
