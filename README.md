@@ -50,6 +50,62 @@ GTCCGCTCGTTCTCTGCGAAGAACGGGGCCCAGGCCATCCACGGTGAACAATGCGAGGAG
 ATTTTAACTCTCCATTATAAGAACTGAATTTCTACTGAACAGTGCCAACACAATTTACCT
 ```
 Contained in this file is every single UCE locus identified in each of the four taxa, using liocanthydrus as the base genome.
+  
+The first major step ([Line 6](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to go into each of the monolithic fasta files, and pull out all the loci for each taxa and then dump them into separate directories. Inside these directories, the loci for that taxa are separated out subdirectories corresponding to the base genome they are found in e.g. (for liocanthydrus again):
+```
+|-liocanthydrus
+	 |- liocanthydrus_insilico-incomplete.fasta
+		 |- ucelocus.txt
+	 |- neohydrocoptus-insilico-incomplete.fasta
+		 |- ucelocus.txt
+	 |- sternocanthus-insilico-incomplete.fasta
+		 |- ucelocus.txt
+	 |- suphisellus-insilico-incomplete.fasta
+		 |- ucelocus.txt
+```
+
+The next step ([Lines 8-31](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to blast between the UCE loci found using different base genomes, within a taxon (to begin with). We are doing this because if, for example for liocanthydrus the locus `uce-10001` derived using neohydrocoptus as a base genome matches to two UCE loci derived using another base genome, say `uce-987` and `uce-118947` using suphisellus as the base genome, then that locus looks to be paralagous within the liocanthydrus genome (or at least similar enough it is likely to cause issues in downstream analyses).
+
+The BLAST results from this are written out into the directory of each taxa as taxaname_blast.txt:
+```
+|-liocanthydrus
+	 |- liocanthydrus_blast.txt
+	 |- liocanthydrus_insilico-incomplete.fasta
+		 |- ucelocus.txt.nsq
+		 |- ucelocus.txt.nin
+		 |- ucelocus.txt.nhr
+		 |- ucelocus.txt
+	 |- neohydrocoptus-insilico-incomplete.fasta
+		 |- ucelocus.txt.nsq
+		 |- ucelocus.txt.nin
+		 |- ucelocus.txt.nhr
+		 |- ucelocus.txt
+	 |- sternocanthus-insilico-incomplete.fasta
+		 |- ucelocus.txt.nsq
+		 |- ucelocus.txt.nin
+		 |- ucelocus.txt.nhr
+		 |- ucelocus.txt
+	 |- suphisellus-insilico-incomplete.fasta
+		 |- ucelocus.txt     
+|-neohydrocoptus
+   |- neohydrocoptus_blast.txt
+	 |- liocanthydrus_insilico-incomplete.fasta (collapsed)
+	 |- neohydrocoptus-insilico-incomplete.fasta (collapsed)
+	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
+	 |- suphisellus-insilico-incomplete.fasta  (collapsed) 
+|-sternocanthus
+   |- sternocanthus_blast.txt
+	 |- liocanthydrus_insilico-incomplete.fasta (collapsed)
+	 |- neohydrocoptus-insilico-incomplete.fasta (collapsed)
+	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
+	 |- suphisellus-insilico-incomplete.fasta (collapsed)  
+|-suphisellus
+   |- suphisellus_blast.txt
+	 |- liocanthydrus_insilico-incomplete.fasta (collapsed)
+	 |- neohydrocoptus-insilico-incomplete.fasta (collapsed)
+	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
+	 |- suphisellus-insilico-incomplete.fasta (collapsed) 
+```
 
 
 
