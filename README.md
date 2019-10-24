@@ -3,11 +3,12 @@
 
 This repository came about because we had 7 different monolithic fasta files containing all UCE loci for all taxa, identified using different base genomes. The idea with this script was to create a "rosetta" stone via BLAST to match up loci identified using different base genomes, so that we could look at the effect of different base genomes on the ability for different UCE loci to be identified in different taxa.
 
-The code assumes you have a folder with just your monolithic fasta files in it (and no other fasta files). It assumes the monolithic files are named in the following fashion: \[taxa name\]\[any single character\]\[insilico\]\[any single character\]\[incomplete\]\[any single character\]\[fasta\] e.g. `liocanthydrus_insilico-incomplete.fasta` or `neohydrocoptus-insilico-incomplete.fasta`. It also assumes you have copied the necessary R-scripts and bash script (in this repository) into the same folder as well. It assumes the fasta header for each locus within these folders is similar to the following (underscore before taxa name, white space after), and that these taxa names match those in the names of the `-insilico-incomplete.fasta` files:
+### What you need and how to run it
+The code assumes you have a folder with just your monolithic fasta files in it (and no other fasta files). It also assumes you have copied the necessary R-scripts and bash script (in this repository) into the same folder as well. It assumes the fasta header for each locus within these folders is similar to the following (underscore before taxa name, white space after):
 ```
 >use-8084_lioTuu1 |uce-8084
 ```
-If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_fasta_by_taxa.R
+If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_fasta_by_taxa.R. It also assumes that these taxa names match those in the "taxa name" part of the `.fasta` files. Please rename the .fasta files if this isn't the case.
 
 You also need to point to the BLAST binaries folder by setting the following variable before starting
 ```
@@ -25,6 +26,12 @@ After doing all of this, start it off by:
 bash monolithic.sh
 ```
 
+### What is it doing?
+
+
+
+
+### Downstream processing
 The utilities folder in this repository contains scripts for extracting the 'good' UCE loci (loci that do not appear to be paralogous in any lineage, and that are found in every lineage) based on the output of monolithic.sh ("output_matrix.txt"), and also for whittling down the probe file to target just these loci.
 
 ### Programs/packages necessary for the pipeline:
