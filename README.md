@@ -8,7 +8,7 @@ The code assumes you have a folder with your monolithic fasta files in it (and n
 ```
 >uce-8084_lioTuu1 |uce-8084
 ```
-If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_fasta_by_taxa.R. It also assumes that these taxa names match those in the "taxa name" part of the `.fasta` files. Please rename the .fasta files if this isn't the case.
+If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_fasta_by_taxa.R to match the regex needed to extract the taxa names. It also assumes that these taxa names match those in the "taxa name" part of the `.fasta` files. Please rename the .fasta files if this isn't the case.
 
 You also need to point to the BLAST binaries folder by setting the following variable before starting
 ```
