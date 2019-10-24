@@ -4,9 +4,9 @@
 This repository came about because we had 7 different monolithic fasta files containing all UCE loci for all taxa, identified using different base genomes. The idea with this script was to create a "rosetta" stone via BLAST to match up loci identified using different base genomes, so that we could look at the effect of different base genomes on the ability for different UCE loci to be identified in different taxa (confused? The [step-by-step](https://github.com/laninsky/comparing_monolithic_UCE_fastas#what-is-it-doing) guide to what the script does might be helpful).
 
 ### What you need and how to run it
-The code assumes you have a folder with your monolithic fasta files in it (and no other fasta files). It also assumes you have copied the necessary R-scripts and bash script (in this repository) into the same folder as well. It assumes the fasta header for each locus within these folders is similar to the following (underscore before taxa name, white space after):
+The code assumes you have a folder with your monolithic fasta files in it (and no other fasta files). It also assumes you have copied the necessary R-scripts and bash script (in this repository) into the same folder as well. It assumes the fasta header for each locus within these folders is similar to the following (underscore before taxa name, white space after, no underscore in the uce-locus name):
 ```
->use-8084_lioTuu1 |uce-8084
+>uce-8084_lioTuu1 |uce-8084
 ```
 If this isn't the case, you will need to modify lines 39-40 and 53-54 in split_fasta_by_taxa.R. It also assumes that these taxa names match those in the "taxa name" part of the `.fasta` files. Please rename the .fasta files if this isn't the case.
 
