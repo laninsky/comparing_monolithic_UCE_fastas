@@ -64,7 +64,7 @@ The first major step ([Line 6](https://github.com/laninsky/comparing_monolithic_
 		 |- ucelocus.txt
 ```
 
-The next step ([Lines 8-31](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to blast between the UCE loci found using different base genomes, within a taxon (to begin with). We are doing this because if, for example for liocanthydrus the locus `uce-10001` derived using neohydrocoptus as a base genome matches to two UCE loci derived using another base genome, say `uce-987` and `uce-118947` using suphisellus as the base genome, then that locus looks to be paralagous within the liocanthydrus genome (or at least similar enough it is likely to cause issues in downstream analyses).
+The next step ([Lines 8-31](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) is to blast between the UCE loci found using different base genomes, within a taxon. We are doing this because if, for example for liocanthydrus the locus `uce-10001` derived using neohydrocoptus as a base genome matches to two UCE loci derived using another base genome, say `uce-987` and `uce-118947` using suphisellus as the base genome, then that locus looks to be paralagous within the liocanthydrus genome (or at least similar enough it is likely to cause issues in downstream analyses).
 
 The BLAST results from this are written out into the directory of each taxa as taxaname_blast.txt:
 ```
