@@ -3,7 +3,7 @@
 
 This repository came about because we had 7 different monolithic fasta files containing all UCE loci for all taxa, identified using different base genomes. The idea with this script was to create a "rosetta" stone via BLAST to match up loci identified using different base genomes, so that we could look at the effect of different base genomes on the ability for different UCE loci to be identified in different taxa.
 
-The code assumes you have a folder with just your monolithic fasta files in it (and no other fasta files). It also assumes you have copied the necessary R-scripts and bash script (in this repository) into the same folder as well. It assumes the fasta header for each locus is similar to the following (underscore before taxa name, white space after):
+The code assumes you have a folder with just your monolithic fasta files in it (and no other fasta files). It assumes the monolithic files are named in the following fashion: \[taxa name\]\[any single character\]\[insilico\]\[any single character\]\[incomplete\]\[any single character\]\[fasta\] e.g. `liocanthydrus_insilico-incomplete.fasta` or `neohydrocoptus-insilico-incomplete.fasta`. It also assumes you have copied the necessary R-scripts and bash script (in this repository) into the same folder as well. It assumes the fasta header for each locus within these folders is similar to the following (underscore before taxa name, white space after), and that these taxa names match those in the names of the `-insilico-incomplete.fasta` files:
 ```
 >use-8084_lioTuu1 |uce-8084
 ```
@@ -44,4 +44,5 @@ Gustafson, G.T., Alexander, A., Sproul, J.S., Pflug, J.M., Maddison, D.R. and Sh
 ```
 
 ### Version history
+0.1: Version used in Baca et al. TBD: made some modifications so that folders already existing in the directory were ignored, and to be more resistent to different naming schemes.  
 0.0: Version used in Gustafson et al. (2019)
