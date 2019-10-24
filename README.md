@@ -1,4 +1,4 @@
-# comparing_monolithic_UCE_fastas v0.0
+# comparing_monolithic_UCE_fastas v0.1
 ### Blasting between monolithic UCE fasta files to find out which loci are shared between different base genomes
 
 This repository came about because we had 7 different monolithic fasta files containing all UCE loci for all taxa, identified using different base genomes. The idea with this script was to create a "rosetta" stone via BLAST to match up loci identified using different base genomes, so that we could look at the effect of different base genomes on the ability for different UCE loci to be identified in different taxa.
@@ -119,14 +119,20 @@ For each taxon, the blast results are then summarized to determine presence/abse
 	 |- suphisellus-insilico-incomplete.fasta
 ```
 
-And then finally these results are summarized across all of the taxa ([Line 39](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) and written out as "output_matrix.txt":
+And then finally these results are summarized across all of the taxa ([Line 39](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh), including identification of "between_taxa_problem" loci that look paralagous when compared across taxa i.e. they appear to be single-copy when looking at each taxon separately, but between taxa comparisons do not show a one-to-one BLAST match) and written out as "output_matrix.txt":
+```
 |- output_matrix.txt
 |- liocanthydrus (collapsed)
 |- neohydrocoptus (collapsed)
 |- sternocanthus (collapsed)
 |- suphisellus (collapsed)
-
-
+```
+output_matrix.txt contains the following columns/groups of columns in the following order:
+* Base genomes (first group of columns named with original fasta name suffixed by "/ucelocus.txt"). Contains the name of the UCE locus as found within that base genome. Generally will only be a "one to one" relationship, unless locus has a between_taxa_problem (loci different within a taxon then match to the same locus across taxa). If multiple loci are present for a base genome, they are separated by commas.	
+* \_length (group of columns named taxaname_length). Contains maximum length of locus for that taxon across all base genomes. Problem_within indicates that within a taxon there was not a one-to-one match of loci across different base genomes. NA = this locus is not found in that taxon.
+* \_longest_base_genome (group of columns named taxaname_longest_base_genome). The base genome that the locus of maximum length was recovered in for each taxon. Same deal for "problem_within" and NA as for the length columns.
+* Base genomes (second group of columns named with original fasta name suffixed by "/ucelocus.txt"). Which taxa were found for each base genome for this locus. If taxa had a "problem_within", labeled taxa_prob_w.
+* between_taxa_problem (single column). A locus with a "between_taxa_problem" == "Y" (see explanation above), otherwise NA.
 
 ### Downstream processing
 The utilities folder in this repository contains scripts for extracting the 'good' UCE loci (loci that do not appear to be paralogous in any lineage, and that are found in every lineage) based on the output of monolithic.sh ("output_matrix.txt"), and also for whittling down the probe file to target just these loci.
