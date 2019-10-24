@@ -7,8 +7,11 @@ for i in `seq 1 $no_fastas`; do current_file=`head -n $i fastalist.txt | tail -n
 
 # This loop is going into each taxon's folder and doing a blast between the fastas recovered using different basegenomes
 basewd=`pwd`
-for i in `cat fastalist.txt | sed 's/.insilico.incomplete.fasta//g'`;
-do cd $i;
+for i in `ls -d */`;
+do dirname=`echo $i | sed 's|/||g'`
+fasta_directory=`grep $dirname fastalist.txt`
+if [ "$fasta_directory" != "" ]; then
+cd $i;
 ls -d */ > base_genomes.txt;
 no_base_genomes=`wc -l base_genomes.txt | awk '{ print$1 }'`;
 # For every base_genome except the last one create a blast database
@@ -28,6 +31,7 @@ rm temp;
 done;
 done;
 cd $basewd;
+fi
 done
 
 # Summarizing across the blast files for each taxa to determine presence/absence of each locus in each taxon 
