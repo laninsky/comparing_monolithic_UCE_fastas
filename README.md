@@ -106,7 +106,7 @@ The BLAST results from this are written out into the directory of each taxon as 
 	 |- sternocanthus-insilico-incomplete.fasta (collapsed)
 	 |- suphisellus-insilico-incomplete.fasta (collapsed) 
 ```
-You might note that in the above file tree, tht within the liocanthydrus folder the subfolder suphisellus-insilico-incomplete.fasta does not have any \*.nsq, \*.nin, or \*.nhr files. This is because we only do one-way blast comparisons between the base genomes, and the suphisellus-derived UCE loci for liocanthydrus have already been compared to all the other genomes (who do have blast databases created for this comparison).
+You might note that in the above file tree, that within the liocanthydrus folder the subfolder suphisellus-insilico-incomplete.fasta does not have any \*.nsq, \*.nin, or \*.nhr files. This is because we only do one-way blast comparisons between the base genomes, and the suphisellus-derived UCE loci for liocanthydrus have already been compared to all the other genomes (who do have blast databases created for this comparison).
 
 For each taxon, the blast results are then summarized to determine presence/absence of each locus in each taxon ([Line 40](https://github.com/laninsky/comparing_monolithic_UCE_fastas/blob/master/monolithic.sh)) e.g. for the liocanthydrus directory:
 ```
