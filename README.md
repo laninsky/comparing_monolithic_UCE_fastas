@@ -27,7 +27,29 @@ bash monolithic.sh
 ```
 
 ### What is it doing?
-
+Let's say we have four monolithic fasta files corresponding to using the following four taxa as base genomes: `liocanthydrus`, `neohydrocoptus`, `sternocanthus`, and `suphisellus`
+```
+liocanthydrus_insilico-incomplete.fasta
+neohydrocoptus-insilico-incomplete.fasta
+sternocanthus-insilico-incomplete.fasta
+suphisellus-insilico-incomplete.fasta
+```
+  
+Let's peak inside `liocanthydrus_insilico-incomplete.fasta`:
+```
+>uce-50205_liocanthydrus |uce-50205
+TTGATATTTTACAAAACCGTTAGAAATCTGAATCTCCGGCAACCGCTTACTGTCAAGTGT
+...
+>uce-18224_neohydrocoptus |uce-18224
+AGTTTTATTCAAGTGAATTTTTTTCTCTCCTTAAACACAATGCCGAGGATAACAATGAAT
+...
+>uce-118947_sternocanthus |uce-118947
+GTCCGCTCGTTCTCTGCGAAGAACGGGGCCCAGGCCATCCACGGTGAACAATGCGAGGAG
+...
+>uce-22825_suphisellus |uce-22825
+ATTTTAACTCTCCATTATAAGAACTGAATTTCTACTGAACAGTGCCAACACAATTTACCT
+```
+Contained in this file is every single UCE locus identified in each of the four taxa, using liocanthydrus as the base genome.
 
 
 
