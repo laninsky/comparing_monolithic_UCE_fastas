@@ -7,7 +7,7 @@ for i in `seq 1 $no_fastas`; do current_file=`head -n $i fastalist.txt | tail -n
 
 # This loop is going into each taxon's folder and doing a blast between the fastas recovered using different basegenomes
 basewd=`pwd`
-for i in `ls -d */`;
+for i in `cat fastalist.txt | sed 's/.insilico.incomplete.fasta//g'`;
 do cd $i;
 ls -d */ > base_genomes.txt;
 no_base_genomes=`wc -l base_genomes.txt | awk '{ print$1 }'`;
