@@ -1,3 +1,31 @@
+# Whittling the probes fasta file down to only a subset of loci
+You may want to use the results of blasting between the different base genomes, to filter 'problematic' loci from your final data set. The code `whittle_uce_probes.R` will whittle down your probe_fasta_file based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic") or by loci that are present in a list of uce_loci (file_type = "uce_list": see below). To run this code, paste (or source) the contents of whittle_uce_probes.R into your R console and then call it by:
+```
+whittle_uce_probes(uce_list_file,probe_fasta_file,basename,file_type)
+```
+where: 
+* `uce_list_file` either points to the output from comparing_monolithic_UCE_fastas/monolithic.sh ("output_matrix.txt" or whatever you renamed it) or a list of uce loci you've assembled (depending on what you put for file_type: "monolithic" or "uce_list") 
+* `probe_fasta_file` is the output probes file from the phyluce pipeline
+* `basename` is the name of the taxa that you designed your final probeset across (if you designed your own probe set, otherwise this can just be a placeholder e.g. "whatever"), and 
+* `file_type` is either "monolithic" for the output_matrix.txt file from comparing_monolithic_UCE_fastas/monolithic.sh (which you can feel free to rename as long as it is still formatted the same) or "uce_list" for a flat file with a list of uce loci separated by each line. Make sure your loci in the list are named the same as in your probe file e.g.
+```
+uce-100
+uce-1011
+uce-1017
+uce-1023
+uce-1025
+
+```
+An example of running the code with monolithic.sh output e.g.
+```
+whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1","monolithic")
+```
+
+An example of running the code with a uce locus file e.g.
+```
+whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","whatever","uce_list")
+```
+
 # Extracting the 'good' loci
 Following the analysis of which UCE loci blasted to which UCE loci across base genomes within taxa, we wanted to extract "the good loci" for each sample in order to calculate coverage (using https://github.com/laninsky/reference_aligning_to_established_loci/tree/master/phase_everyone). To do this, we sorted the uce loci by "non-problematic status" (i.e one to one relationships of UCE loci found in different base genomes and different taxa) and by them being found in all 7 of the taxa we were evaluating. If there was more than one base genome that led to a locus being found across all 7 taxa, we used the base genome that resulted in the longest-alignment for the largest number of taxa. This gave us a list formatted like the following:
 ```
@@ -26,30 +54,4 @@ echo ">""$i" >> fastas/uce-$j.fasta;
 head -n $lineno $basefile | tail -n 1 >> fastas/uce-$j.fasta;
 done;
 done;
-```
-
-# Whittling the probes fasta file down to only a subset of loci
-To use, paste the contents of whittle_uce_probes.R into your R console.
-
-This code will whittle down your probe_fasta_file based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic") or by loci that are present in a list of uce_loci (file_type = "uce_list"). To run this code:"
-```
-whittle_uce_probes(uce_list_file,probe_fasta_file,basename,file_type)
-```
-where uce_list_file is either the output from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci (depending on what you put for file_type), probe_fasta_file is the output probes file from the phyluce pipeline, basename is the name of the taxa that you designed your final probeset across (if you designed your own probe set, otherwise this can just be a placeholder e.g. "whatever"), and file_type is either "monolithic" for the output of comparing_monolithic_UCE_fastas/monolithic.sh or "uce_list" for a flat file with a list of uce loci separated by each line. Make sure your loci in the list are named the same as in your probe file e.g.
-```
-uce-100
-uce-1011
-uce-1017
-uce-1023
-uce-1025
-
-```
-An example of running the code with monolithic.sh output e.g.
-```
-whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","Pterostichus.1","monolithic")
-```
-
-An example of running the code with a uce locus file e.g.
-```
-whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","whatever","uce_list")
 ```
