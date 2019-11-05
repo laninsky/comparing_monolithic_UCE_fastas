@@ -1,3 +1,5 @@
+# comparing_monolithic_UCE_fastas v0.2: select_base_genome.R
+
 select_base_genome <- function(output_matrix_file) {
   cat("This script will take an output_matrix_file that results from monolithic.sh and\n")
   cat("use it to provide several comparisons of the best performing base genome\n")
