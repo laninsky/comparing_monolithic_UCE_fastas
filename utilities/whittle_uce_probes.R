@@ -11,9 +11,9 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   print('taxa_filter is an option that allows you to filter just to the UCE loci recovered across all taxa = "Y" (filter based on this) or "N" (do not filter)')
   print("basename is the name of the taxa that you designed your final probeset across if chosing the monolithic option (can be left blank if using uce_list") 
   print("e.g.")
-  cat('whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","monolithic","Pterostichus.1")\n')
+  cat('whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","monolithic","Y","Pterostichus.1")\n')
   print("e.g.")
-  cat('whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","uce_list")\n')
+  cat('whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uce_loci_from_baca_2017.txt","C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\Coleoptera-UCE-1.1K-v1","uce_list","N")\n')
     
   if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
   
@@ -80,7 +80,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   keepheaderlines <- which(headerlines %in% as.matrix(temp))
   
   # Finding the number of our "kept" uce loci that are in the headerlines
-  kept_loci <- length(which(as.matrix(temp) %in% headerlines)
+  kept_loci <- length(which(as.matrix(temp) %in% headerlines))
     
   # Getting the position of the headerlines in the original output file
   keepheaderlines <- (keepheaderlines*2)-1
