@@ -1,3 +1,5 @@
+# comparing_monolithic_UCE_fastas v0.2: monolithic.sh
+
 ls *.fasta > fastalist.txt
 
 no_fastas=`wc -l fastalist.txt | awk '{ print$1 }'`
