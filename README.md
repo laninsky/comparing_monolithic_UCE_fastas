@@ -137,7 +137,7 @@ output_matrix.txt contains the following columns/groups of columns in the follow
 If a locus is problematic within all taxa it is found in, it will not be printed out to the output_matrix.txt file.
 
 ### Downstream processing
-The utilities folder in this repository contains scripts for extracting the 'good' UCE loci (loci that do not appear to be paralogous in any lineage, and that are found in every lineage) based on the output of monolithic.sh ("output_matrix.txt"), and also for whittling down the probe file to target just these loci.
+The utilities folder in this repository contains scripts for identifying the best base genome to use based on the output of monolithic.sh ("output_matrix.txt"), extracting the 'good' UCE loci (loci that do not appear to be paralogous in any lineage, and that are found in every lineage) and whittling down the probe file for your selected base genome to target just the 'good' loci.
 
 ### Programs/packages necessary for the pipeline:
 ```
