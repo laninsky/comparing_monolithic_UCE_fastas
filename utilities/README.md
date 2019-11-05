@@ -1,3 +1,10 @@
+# Selecting a base genome
+Based on the output of monolithic.sh, for all 'good' loci (not problematic within or between taxa) select_base_genome.R will print off the number of these loci that were found with each base genome (bigger is better), which base genomes recovered the greatest number of taxa on average (bigger is better), and which base genomes resulted in the longest average recovered sequences across taxa (again, bigger is better). You can use this information to make a decision about which base genome you think is the best for developing your probes from. To run this code, paste (or source) the contents of select_base_genome.R into your R console and then call it by:
+```
+select_base_genome(output_matrix_file)
+```
+where output_matrix file is the output from comparing_monolithic_UCE_fastas/monolithic.sh ("output_matrix.txt" or whatever you renamed it) 
+
 # Whittling the probes fasta file down to only a subset of loci
 You may want to use the results of blasting between the different base genomes, to filter 'problematic' loci from your final data set. The code `whittle_uce_probes.R` will whittle down your probe_fasta_file based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic") or by loci that are present in a list of uce_loci (file_type = "uce_list": see below). To run this code, paste (or source) the contents of whittle_uce_probes.R into your R console and then call it by:
 ```
