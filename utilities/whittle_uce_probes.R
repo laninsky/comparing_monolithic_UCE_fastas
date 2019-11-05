@@ -8,7 +8,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   print("where uce_list_file is an output file from comparing_monolithic_UCE_fastas/monolithic.sh or a list of uce loci,")
   print("probe_fasta_file is the output probes file from the phyluce pipeline,")
   print("file_type is the type of file used to whittle i.e. output from monolithic.sh = 'monolithic' or a list of uce loci = 'uce_list'")
-  print('taxa_filter is an option that allows you to filter just to the UCE loci recovered across all taxa = "Y" (filter based on this) or "N" (don't filter)')
+  print('taxa_filter is an option that allows you to filter just to the UCE loci recovered across all taxa = "Y" (filter based on this) or "N" (do not filter)')
   print("basename is the name of the taxa that you designed your final probeset across if chosing the monolithic option (can be left blank if using uce_list") 
   print("e.g.")
   cat('whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","monolithic","Pterostichus.1")\n')
