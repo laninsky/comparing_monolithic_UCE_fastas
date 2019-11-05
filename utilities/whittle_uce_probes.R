@@ -46,11 +46,17 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,basename
     # Filtering out loci that have between_taxa_problems
     temp <- filter(temp,is.na(between_taxa_problem))
   
-    # Filtering out loci that have problems within taxa
+    # Getting columns associated with "_longest_base_genome"
     columns_to_check <- which(grepl("_longest_base_genome",names(temp)))
     
+    # Using these columns to eliminate rows where there are within taxa problems
+    # and those that have NAs (taxa are missing) if taxa_filter selected
     for (i in columns_to_check) {
-      temp <- temp %>% filter(temp[,i]!="problem_within" | is.na(temp[,i]))
+      if (taxa_filter=="N") {
+        temp <- temp %>% filter(temp[,i]!="problem_within" | is.na(temp[,i]))
+      } else {
+        temp <- temp %>% filter(temp[,i]!="problem_within" & !is.na(temp[,i]))
+      }  
     }  
   
     # Taking just the uce-locus names for the basename in our probe_fasta_file
@@ -71,6 +77,10 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,basename
   
   # Then finding the headerlines that are in our list of "kept" uce loci
   keepheaderlines <- which(headerlines %in% as.matrix(temp))
+  
+  # Finding the number of our "kept" uce loci that are in the headerlines
+  kept_loci <- length(which(as.matrix(temp) %in% headerlines)
+    
   # Getting the position of the headerlines in the original output file
   keepheaderlines <- (keepheaderlines*2)-1
   # Adding in their associate sequences
@@ -82,5 +92,5 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,basename
   
   write.table(outputmatrix,"whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
   
-  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",(dim(temp)[1])," loci have been written out to ",getwd(),"/whittled_UCE_probes.fasta",sep=""))
+  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/whittled_UCE_probes.fasta",sep=""))
 }
