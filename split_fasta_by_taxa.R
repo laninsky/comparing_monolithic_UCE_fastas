@@ -1,3 +1,4 @@
+# comparing_monolithic_UCE_fastas v0.2: split_fasta_by_taxa.R
 
 intable <- read.table("temp",header=FALSE,stringsAsFactors=FALSE,sep="\t")
 
