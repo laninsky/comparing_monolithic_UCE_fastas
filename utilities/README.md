@@ -6,7 +6,7 @@ select_base_genome(output_matrix_file)
 where output_matrix file is the output from comparing_monolithic_UCE_fastas/monolithic.sh ("output_matrix.txt" or whatever you renamed it) 
 
 # Whittling the probes fasta file down to only a subset of loci
-You may want to use the results of blasting between the different base genomes, to filter 'problematic' loci from your final data set. The code `whittle_uce_probes.R` will whittle down your probe_fasta_file based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic") or by loci that are present in a list of uce_loci (file_type = "uce_list": see below). To run this code, paste (or source) the contents of whittle_uce_probes.R into your R console and then call it by:
+You may want to use the results of blasting between the different base genomes, to filter 'problematic' loci from your final data set. The code `whittle_uce_probes.R` will whittle down your probe_fasta_file based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic") or by loci that are present in a list of uce_loci (file_type = "uce_list": see below). It will further filter them to just loci that are found across all the taxa in your dataset. To run this code, paste (or source) the contents of whittle_uce_probes.R into your R console and then call it by:
 ```
 whittle_uce_probes(uce_list_file,probe_fasta_file,file_type,basename)
 ```
