@@ -1,4 +1,4 @@
-# comparing_monolithic_UCE_fastas v0.1
+# comparing_monolithic_UCE_fastas v0.2
 ### Blasting between monolithic UCE fasta files to find out which loci are shared between different base genomes
 
 This repository came about because we had 7 different monolithic fasta files containing all UCE loci for all taxa, identified using different base genomes. The idea with this script was to create a "rosetta" stone via BLAST to match up loci identified using different base genomes, so that we could look at the effect of different base genomes on the ability for different UCE loci to be identified in different taxa (confused? The [step-by-step](https://github.com/laninsky/comparing_monolithic_UCE_fastas#what-is-it-doing) guide to what the script does might be helpful).
@@ -134,6 +134,8 @@ output_matrix.txt contains the following columns/groups of columns in the follow
 * Base genomes (second group of columns named with original fasta name suffixed by "/ucelocus.txt"). Which taxa were found for each base genome for this locus. If taxa had a "problem_within", labeled taxa_prob_w.
 * between_taxa_problem (single column). A locus with a "between_taxa_problem" == "Y" (see explanation above), otherwise NA.
 
+If a locus is problematic within all taxa it is found in, it will not be printed out to the output_matrix.txt file.
+
 ### Downstream processing
 The utilities folder in this repository contains scripts for extracting the 'good' UCE loci (loci that do not appear to be paralogous in any lineage, and that are found in every lineage) based on the output of monolithic.sh ("output_matrix.txt"), and also for whittling down the probe file to target just these loci.
 
@@ -154,5 +156,6 @@ Gustafson, G.T., Alexander, A., Sproul, J.S., Pflug, J.M., Maddison, D.R. and Sh
 ```
 
 ### Version history
-0.1: Version used in Baca et al. TBD: made some modifications so that folders already existing in the directory were ignored, and to be more resistent to different naming schemes.  
+0.2: Version used in Baca et al. TBD: rewrote some of the code to make it signficantly faster, and to fix bugs in the creation of the output_matrix.txt file (bug caused a column of numbers to be the first column in the file given some input combos)  
+0.1: made some modifications so that folders already existing in the directory were ignored, and to be more resistent to different naming schemes.  
 0.0: Version used in Gustafson et al. (2019)
