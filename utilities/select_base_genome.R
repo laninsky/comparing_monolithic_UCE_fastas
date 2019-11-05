@@ -29,7 +29,7 @@ select_base_genome <- function(output_matrix_file) {
   # Base genome names
   base_genome_names <- names(temp)[grepl("ucelocus.txt$",names(temp))]
   
-  # Number of UCE probes for UCE loci that were found in all taxa where each base genome
+  # Number of good UCE loci that were found in all taxa where each base genome
   # had probes present
   print(paste(dim(temp)[1]," UCE loci were found in all taxa",sep=""))
   print("Of these, the following number of loci were present in each base genome (larger is better):")
