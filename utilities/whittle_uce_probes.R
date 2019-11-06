@@ -80,7 +80,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   keepheaderlines <- which(headerlines %in% as.matrix(temp))
   
   # Finding the number of our "kept" uce loci that are in the headerlines
-  kept_loci <- length(which(as.matrix(temp) %in% headerlines))
+  kept_loci <- length(which(as.matrix(temp) %in% headerlines[keepheaderlines]))
     
   # Getting the position of the headerlines in the original output file
   keepheaderlines <- (keepheaderlines*2)-1
