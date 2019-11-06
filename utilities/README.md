@@ -8,7 +8,7 @@ where output_matrix file is the output from comparing_monolithic_UCE_fastas/mono
 # Whittling the probes fasta file down to only a subset of loci
 You may want to use the results of blasting between the different base genomes, to filter 'problematic' loci from your final data set. The code `whittle_uce_probes.R` will whittle down your probe_fasta_file based on uce loci in your monolithic_output_name file (i.e. the output from comparing_monolithic_UCE_fastas/monolithic.sh) that are not 'problematic' (i.e. paralagous) within or between taxa (file_type = "monolithic") or by loci that are present in a list of uce_loci (file_type = "uce_list": see below). It will further filter them to just loci that are found across all the taxa in your dataset. To run this code, paste (or source) the contents of whittle_uce_probes.R into your R console and then call it by:
 ```
-whittle_uce_probes(uce_list_file,probe_fasta_file,file_type,basename)
+whittle_uce_probes(uce_list_file,probe_fasta_file,file_type,taxa_filter,basename)
 ```
 where: 
 * `uce_list_file` either points to the output from comparing_monolithic_UCE_fastas/monolithic.sh ("output_matrix.txt" or whatever you renamed it) or a list of uce loci you've assembled (depending on what you put for file_type: "monolithic" or "uce_list") 
@@ -21,12 +21,13 @@ uce-1017
 uce-1023
 uce-1025
 ```
+* `taxa_filter` is an option that allows you to filter just to the UCE loci recovered across all taxa if using the "monolithic" option = "Y" (filter based on this) or "N" (do not filter)
 * `basename` is the name of the taxa that you wish to select your final probeset across if you are inputting a "monolithic" file type
 
 
 An example of running the code with monolithic.sh output e.g.
 ```
-whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","monolithic","Pterostichus.1")
+whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","monolithic","Y","Pterostichus.1")
 ```
 
 An example of running the code with a uce locus file e.g.
