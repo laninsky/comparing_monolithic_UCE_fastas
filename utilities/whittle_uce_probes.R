@@ -76,6 +76,8 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   headerlines <- outputmatrix[(grep(">",outputmatrix[,1])),1]
   headerlines <- gsub("_p.*","",gsub(">","",headerlines))
   
+  print(paste("Original probes file had ",(dim(outputmatrix)[1]/2)," probes targetting ",length(unique(headerlines))," loci",sep=""))
+  
   # Then finding the headerlines that are in our list of "kept" uce loci
   keepheaderlines <- which(headerlines %in% as.matrix(temp))
   
