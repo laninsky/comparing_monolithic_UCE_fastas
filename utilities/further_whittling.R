@@ -57,10 +57,11 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
   }  
   
   # Sorting loci based on average loci length and taking the the top no_of_loci loci
-  # First need to ensure the columns are numerical
-  temp %>% mutate_at(vars(contains("_length")),funs(as.numeric)) %>% 
+  # First need to ensure the columns are numerical, then taking columns with length and
+  # calculating the mean
+  temp <- temp %>% mutate_at(vars(contains("_length")),funs(as.numeric)) %>% 
     mutate(av_length=select(.,contains("_length")) %>% rowMeans()) %>% 
-    arrange(desc(av_length)) %>% select(av_length)
+    arrange(desc(av_length)) %>% slice(1:no_of_loci)
 
   # Taking just the uce-locus names for the basename in our probe_fasta_file
   temp <- select(temp,grep(basename,names(temp),fixed=TRUE)[1])
@@ -91,7 +92,7 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
   # subsetting these desired probes from the total probes file
   outputmatrix <- matrix(outputmatrix[keepheaderlines,],ncol=1)
   
-  write.table(outputmatrix,"whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
+  write.table(outputmatrix,"further_whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
   
-  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/whittled_UCE_probes.fasta",sep=""))
+  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/further_whittled_UCE_probes.fasta",sep=""))
 }
