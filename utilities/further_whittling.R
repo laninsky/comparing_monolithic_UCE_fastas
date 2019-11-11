@@ -51,10 +51,14 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
   columns_to_check <- which(grepl("_longest_base_genome",names(temp)))
     
   # Using these columns to eliminate rows where there are within taxa problems
-  # and those that have NAs (taxa are missing) if taxa_filter selected
+  # and those that have NAs (taxa are missing) 
   for (i in columns_to_check) {
     temp <- temp %>% filter(temp[,i]!="problem_within" & !is.na(temp[,i]))
   }  
+  
+  # Removing loci that were not characterized in our base genome of choice
+  removerows <- which(is.na(temp[,(grep(basename,names(temp))[1])]))
+  temp <- temp[-removerows,]
   
   # Sorting loci based on average loci length and taking the the top no_of_loci loci
   # First need to ensure the columns are numerical, then taking columns with length and
@@ -65,9 +69,6 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
 
   # Taking just the uce-locus names for the basename in our probe_fasta_file
   temp <- select(temp,grep(basename,names(temp),fixed=TRUE)[1])
-    
-  # Removing any is.na rows
-  temp <- filter(temp,!is.na(temp[,1]))
     
   # Getting the lines of the probe file that are found in our list of "keeper" loci
   # First, extracting uce names from the probe file
