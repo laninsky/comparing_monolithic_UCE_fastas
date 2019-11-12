@@ -95,5 +95,15 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
   
   write.table(outputmatrix,"further_whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
   
-  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/further_whittled_UCE_probes.fasta",sep=""))
+  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/further_whittled_UCE_probes.fasta. Information on these loci has been written out to filtered_output_matrix.txt",sep=""))
+  
+  # Generating a summary of the loci that have been kept
+  temp <- read_table2(monolithic_file)
+  headerlines <- NULL
+  headerlines <- outputmatrix[(grep(">",outputmatrix[,1])),1]
+  headerlines <- unique(gsub("_p.*","",gsub(">","",headerlines)))
+  keeprows <- which(as.matrix(temp[,(grep(basename,names(temp))[1])]) %in% headerlines)
+  temp <- temp[keeprows,]
+  
+  write.table(temp,"filtered_output_matrix.txt",col.names=TRUE,row.names=FALSE,quote=FALSE)
 }
