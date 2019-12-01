@@ -93,9 +93,9 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
   # subsetting these desired probes from the total probes file
   outputmatrix <- matrix(outputmatrix[keepheaderlines,],ncol=1)
   
-  write.table(outputmatrix,"further_whittled_UCE_probes.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
+  write.table(outputmatrix,"further_whittled_UCE_probes_length.fasta",col.names=FALSE,row.names=FALSE,quote=FALSE)
   
-  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/further_whittled_UCE_probes.fasta. Information on these loci has been written out to filtered_output_matrix.txt",sep=""))
+  print(paste((dim(outputmatrix)[1]/2)," probes targetting ",kept_loci," loci have been written out to ",getwd(),"/further_whittled_UCE_probes_length.fasta. Information on these loci has been written out to filtered_output_matrix.txt",sep=""))
   
   # Generating a summary of the loci that have been kept
   temp <- read_table2(monolithic_file)
@@ -105,5 +105,5 @@ further_whittling <- function(monolithic_file,probe_fasta_file,basename,no_of_lo
   keeprows <- which(as.matrix(temp[,(grep(basename,names(temp))[1])]) %in% headerlines)
   temp <- temp[keeprows,]
   
-  write.table(temp,"filtered_output_matrix.txt",col.names=TRUE,row.names=FALSE,quote=FALSE)
+  write.table(temp,"filtered_output_matrix_length.txt",col.names=TRUE,row.names=FALSE,quote=FALSE)
 }
