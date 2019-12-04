@@ -24,7 +24,6 @@ uce-1025
 * `taxa_filter` is an option that allows you to filter just to the UCE loci recovered across all taxa if using the "monolithic" option = "Y" (filter based on this) or "N" (do not filter)
 * `basename` is the name of the taxa that you wish to select your final probeset across if you are inputting a "monolithic" file type
 
-
 An example of running the code with monolithic.sh output e.g.
 ```
 whittle_uce_probes("/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/output_matrix_99.txt","/Users/alanaalexander/Dropbox/beetles/grey_whittled_probes/Adephaga_11Kv1.fasta","monolithic","Y","Pterostichus.1")
@@ -38,7 +37,13 @@ whittle_uce_probes("C:\\Users\\Alana\\Dropbox\\beetles\\grey_whittled_probes\\uc
 This script will output a file, `whittled_UCE_probes.fasta` into your working directory, containing the whittled down probe set, and also print off a summary of how many probes/loci are in that file.
 
 # Further whittling your loci
-whittle_uce_probes might not filter your loci down to a small enough number of loci/probes. That's where `further_whittling_length` and `further_whittling_random` come in. Both of these functions will take your `monolithic_file` (the output from comparing_monolithic_UCE_fastas/monolithic.sh ("output_matrix.txt" or whatever you renamed it)), `probe_fasta_file` (the output probes file from the phyluce pipeline), basename (the taxa that probe_fasta_file is designed across), and a `no_of_loci` (the number of loci you want to shoot for). `further_whittling_length` will take the longest average `no_of_loci` from the `monolithic_file` and output the probes for these in the file "further_whittled_UCE_probes_length.fasta", and their associated properties in "filtered_output_matrix_length.txt". `further_whittling_random` does something similar, but instead of taking the `no_of_loci` longest average loci, it just picks out `no_of_loci` random loci from the `monolithic_file` and output the probes for these in the file "further_whittled_UCE_probes_random.fasta", and their associated properties in "filtered_output_matrix_random.txt". 
+whittle_uce_probes might not filter your loci down to a small enough number of loci/probes. That's where `further_whittling_length` and `further_whittling_random` come in. Both of these functions will take your `monolithic_file` (the output from comparing_monolithic_UCE_fastas/monolithic.sh ("output_matrix.txt" or whatever you renamed it)), `probe_fasta_file` (the output probes file from the phyluce pipeline), `basename` (the taxa that probe_fasta_file is designed across), and a `no_of_loci` (the number of loci you want to shoot for). `further_whittling_length` will take the longest average `no_of_loci` from the `monolithic_file` and output the probes for these in the file "further_whittled_UCE_probes_length.fasta", and their associated properties in "filtered_output_matrix_length.txt". `further_whittling_random` does something similar, but instead of taking the `no_of_loci` longest average loci, it just picks out `no_of_loci` random loci from the `monolithic_file` and outputs the probes for these in the file "further_whittled_UCE_probes_random.fasta", and their associated properties in "filtered_output_matrix_random.txt". 
+
+An example of running the `further_whittling_length` code:
+`further_whittling_length("output_matrix.txt","whittled_UCE_probes.fasta","liocanthydrus",3213)`  
+
+An example of running the `further_whittling_random` code:
+`further_whittling_random("output_matrix.txt","whittled_UCE_probes.fasta","liocanthydrus",3213)`  
 
 # Extracting the 'good' loci
 You may then want to extract the sequences of each taxa for your whittled down list. For example, we wanted to extract "the good loci" for each sample in order to calculate coverage (using https://github.com/laninsky/reference_aligning_to_established_loci/tree/master/phase_everyone). To do this, in excel (yes, I should write some R code for this!) we sorted the uce loci by "non-problematic status" (i.e one to one relationships of UCE loci found in different base genomes and different taxa) and by them being found in all 7 of the taxa we were evaluating. If there was more than one base genome that led to a locus being found across all 7 taxa, we used the base genome that resulted in the longest-alignment for the largest number of taxa. This gave us a list formatted like the following:
