@@ -158,4 +158,4 @@ Gustafson, G.T., Alexander, A., Sproul, J.S., Pflug, J.M., Maddison, D.R. and Sh
 ### Version history
 0.2: Version used in Baca et al. TBD: rewrote some of the code to make it signficantly faster, and to fix bugs in the creation of the output_matrix.txt file (bug caused a column of numbers to be the first column in the file given some input combos)  
 0.1: made some modifications so that folders already existing in the directory were ignored, and to be more resistent to different naming schemes.  
-0.0: Version used in Gustafson et al. (2019)
+0.0: Version used in Gustafson et al. (2019)  
