@@ -16,7 +16,7 @@ length_list <- paste(taxa_list,"_length",sep="")
 longbase_list <- paste(taxa_list,"_longest_base_genome",sep="")
 
 # Getting the base names for column list from the first of our summarized file list.
-temp_output <- read_table2(file_list[1])
+temp_output <- read_table(file_list[1])
 base_list <- names(temp_output[1,1:((which(names(temp_output)=="max_length"))-1)])
 
 # Finding the maximum column number where uce loci are listed
@@ -46,7 +46,7 @@ for (i in file_list) { #1A
   output_taxa <- which(grepl(paste(taxa,"_l",sep=""),output_matrix_names)==TRUE)
   
   # Reading in the summarized blast matches for the taxa we are up to
-  temp_output <- read_table2(i) 
+  temp_output <- read_table(i) 
   
   # Extracting loci which are problematic within taxa and adding these
   # to our problem_taxa table to be dealt with later on
@@ -56,7 +56,7 @@ for (i in file_list) { #1A
   problem_taxa <- bind_rows(problem_taxa,temp_problematic_loci) %>% distinct()
   
   # Removing problematic matches from the taxa we are up to
-  temp_output <- read_table2(i) %>% filter(problem_locus=="N")
+  temp_output <- read_table(i) %>% filter(problem_locus=="N")
   
   # If output_matrix doesn't yet exist, creating it with the first sample
   if(is.null(output_matrix)) {
