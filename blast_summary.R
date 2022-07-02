@@ -1,4 +1,4 @@
-# comparing_monolithic_UCE_fastas v0.2: split_fasta_by_taxa.R
+# comparing_monolithic_UCE_fastas v0.2: blast_summary.R
 
 for (i in list.files(pattern="_blast.txt",recursive=TRUE)) {
   temp <- as.matrix(read.csv(i, header=FALSE))
