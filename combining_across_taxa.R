@@ -106,8 +106,9 @@ for (i in file_list) { #1A
       
       # Adding the taxa to the base_genomes to show what taxa were found for each base_genome
       cols_to_paste <- which(!is.na(match_rows[j,(dim(match_rows)[2]-pivot_col):dim(match_rows)[2]]))+dim(match_rows)[2]-pivot_col-1
-      output_matrix[row_index,cols_to_paste] <- gsub("NA,","",paste(output_matrix[row_index,cols_to_paste],match_rows[j,cols_to_paste],sep=","))
-      
+      # Replace this line due to tidyverse/vector updates
+      output_matrix[row_index,cols_to_paste] <- matrix((gsub("NA,","",paste(output_matrix[row_index,cols_to_paste],match_rows[j,cols_to_paste],sep=","))),nrow=1,byrow=TRUE)
+
       # Progress meter
       if ((j%%1000)==0) {
         print(paste(round(((j/dim(match_rows)[1])*100),2),"% of the way through non-problematic loci for ",taxa,sep=""))
@@ -159,7 +160,9 @@ for (i in file_list) { #1A
             
             # Adding the taxa to the base_genomes to show what taxa were found for each base_genome
             cols_to_paste <- which(!is.na(problem_rows[j,(dim(problem_rows)[2]-pivot_col):dim(problem_rows)[2]]))+dim(problem_rows)[2]-pivot_col-1
-            output_matrix[row_index,cols_to_paste] <- gsub("NA,","",paste(output_matrix[row_index,cols_to_paste],problem_rows[j,cols_to_paste],sep=","))
+            
+            # Replace this line due to tidyverse/vector updates
+            output_matrix[row_index,cols_to_paste] <- matrix((gsub("NA,","",paste(output_matrix[row_index,cols_to_paste],problem_rows[j,cols_to_paste],sep=","))),nrow=1,byrow=TRUE)
             # Otherwise...there are some discrepancies that need to be addressed
             # First up is the situation where loci match up to different loci
             # depending on the base genome used
@@ -178,7 +181,9 @@ for (i in file_list) { #1A
             }
             # Adding the taxa to the base_genomes to show what taxa were found for each base_genome
             cols_to_paste <- which(!is.na(problem_rows[j,(dim(problem_rows)[2]-pivot_col):dim(problem_rows)[2]]))+dim(problem_rows)[2]-pivot_col-1
-            output_matrix[row_index,cols_to_paste] <- gsub("NA,","",paste(output_matrix[row_index,cols_to_paste],problem_rows[j,cols_to_paste],sep=","))
+            
+            # Replace this line due to tidyverse/vector updates
+            output_matrix[row_index,cols_to_paste] <- matrix((gsub("NA,","",paste(output_matrix[row_index,cols_to_paste],problem_rows[j,cols_to_paste],sep=","))),nrow=1,byrow=TRUE)
             
             # Adding in that this locus is a between_taxa_problem
             output_matrix[row_index,dim(output_matrix)[2]] <- "Y"
@@ -217,7 +222,8 @@ for (i in file_list) { #1A
                   # If the output_matrix entry isn't already present, 
                   # paste it in separated by a comma
                   if (!grepl(as.matrix(output_matrix[l,k]),as.matrix(problem_rows[j,k]))) {
-                    problem_rows[j,k] <- gsub("NA,","",paste(output_matrix[l,k],problem_rows[j,k],sep=","))    
+                    # Replace this line due to tidyverse/vector updates
+                    problem_rows[j,k] <- matrix((gsub("NA,","",paste(output_matrix[l,k],problem_rows[j,k],sep=","))),nrow=1,byrow=TRUE)    
                   }
                 }
               }
@@ -258,7 +264,8 @@ for (j in 1:(dim(problem_taxa)[1])) {
     problem_col <- grep(toString(problem_taxa[j,2]),names(output_matrix),fixed=TRUE)[2]
     # And noting that this taxa was present, but with problems
     output_matrix[problem_row,problem_col] <- paste(output_matrix[problem_row,problem_col],",",problem_taxa[j,1],"_prob_w",sep="")
-    output_matrix[problem_row,problem_col] <- gsub("NA","",output_matrix[problem_row,problem_col])
+    # Replace this line due to tidyverse/vector updates
+    output_matrix[problem_row,problem_col] <- matrix((gsub("NA","",output_matrix[problem_row,problem_col])),nrow=1,byrow=TRUE)
   }
 }
 
