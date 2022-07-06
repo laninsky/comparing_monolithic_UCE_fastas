@@ -42,7 +42,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   
   if (file_type=="monolithic") {
     # Reading in the monolithic output
-    temp <- read_table(uce_list_file)
+    temp <- read.table(uce_list_file,header = TRUE)
   
     # Filtering out loci that have between_taxa_problems
     temp <- filter(temp,is.na(between_taxa_problem))
@@ -67,7 +67,7 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
     temp <- filter(temp,!is.na(temp[,1]))
   
  } else {
-    temp <- read_table(uce_list_file,col_names = FALSE)
+    temp <- read.table(uce_list_file,header = FALSE)
  }   
 
   # Getting the lines of the probe file that are found in our list of "keeper" loci
