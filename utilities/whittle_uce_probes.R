@@ -18,19 +18,19 @@ whittle_uce_probes <- function(uce_list_file,probe_fasta_file,file_type,taxa_fil
   if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
   
   # Reading in probe_fasta_file
-  temp <- read_table(probe_fasta_file,col_names = FALSE)
+  temp <- readLines(probe_fasta_file)
   
   # "One-lining" sequence associated with each fasta header
-  number_rows <- as.numeric(as.matrix(temp %>% filter(grepl(">",X1)) %>% count())[1,1])*2
+  number_rows <- sum(grepl(">",temp))*2
   outputmatrix <- matrix(NA,ncol=1,nrow=number_rows)
-  outputmatrix[seq(1,dim(outputmatrix)[1],2),1] <- as.matrix(temp %>% filter(grepl(">",X1)))
+  outputmatrix[seq(1,dim(outputmatrix)[1],2),1] <- temp[grepl(">",temp)]
   
   outputmatrixpos <- 2
   i <- 2
   tempseq <- NULL
-  while (i <= dim(temp)[1]) {
-      if (!(grepl(">",temp[i,1]))) {
-          tempseq <- paste(tempseq,temp[i,1],sep="")
+  while (i <= length(temp)) {
+      if (!(grepl(">",temp[i]))) {
+          tempseq <- paste(tempseq,temp[i],sep="")
       } else {
         outputmatrix[outputmatrixpos,1] <- tempseq
         tempseq <- NULL
